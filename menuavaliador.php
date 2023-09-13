@@ -74,7 +74,7 @@
         <img src="imagens/MeusDados.png" alt="Imagem do Botão">
       </button>
       
-      <button class="square-button" onclick="window.location.href='novaAcaoAvaliador.html';">
+      <button class="square-button" onclick="window.location.href='novaAcaoAvaliador.php';">
         <img src="imagens/CadastrarAcoes.png" alt="Imagem do Botão">
       </button>
 

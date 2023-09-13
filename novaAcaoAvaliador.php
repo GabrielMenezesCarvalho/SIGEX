@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
-    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <script src="https://cdn.tiny.cloud/1/s3zlvxi87b9m37cn8vukivxht0lpogsjccobx1rw0kul8z9u/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
     <title>Formulário de Submissão de Ação de Extensão</title>
     <style>
         .navbar {
@@ -32,13 +32,16 @@
 
         .margem-desktop {
             margin-left: 12%;
-            
+
             margin-right: 12%;
         }
     </style>
 </head>
 
 <body>
+
+    
+
     <nav class="navbar" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
             <a class="navbar-item" href="#">
@@ -50,7 +53,15 @@
                 <div class="user-icon">
                     <i class="fa fa-user-circle"></i>
                 </div>
-                Seu Nome de Usuário
+                <?php
+                    session_start();
+                    if(empty($_SESSION) ){
+                        print "<script>location.href='index.php';</script>";
+                    }
+                    print "Olá, ".$_SESSION["nome"];
+                    print "<a href='logout.php'>Sair</a>";
+
+                ?>
             </div>
         </div>
     </nav>
@@ -226,69 +237,73 @@
             </div>
         </div>
 
-        
-        <textarea id="queroEditar"></textarea>
 
+        <textarea id="image">
+  </textarea>
+  <script>
+    tinymce.init({
+      selector: '#image',
+      height: 1000,
+      plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage tinycomments tableofcontents footnotes mergetags autocorrect typography inlinecss',
+      toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+      tinycomments_mode: 'embedded',
+      // images_upload_url: 'upload.php',
+      images_upload_handler: (blobInfo, progress) => new Promise((resolve, reject) => {
+        const xhr = new XMLHttpRequest();
+        xhr.withCredentials = false;
+        xhr.open('POST', 'upload.php');
 
+        xhr.upload.onprogress = (e) => {
+          progress(e.loaded / e.total * 100);
+        };
 
-        <script>
-
-            tinymce.init({
-                selector: 'textarea#queroEditar',
-                plugins: 'image code',
-                toolbar: 'undo redo | link image | code',
-                /* enable title field in the Image dialog*/
-                image_title: true,
-                /* enable automatic uploads of images represented by blob or data URIs*/
-                automatic_uploads: true,
-                /*
-                  URL of our upload handler (for more details check: https://www.tiny.cloud/docs/configure/file-image-upload/#images_upload_url)
-                  images_upload_url: 'postAcceptor.php',
-                  here we add custom filepicker only to Image dialog
-                */
-                file_picker_types: 'image',
-                /* and here's our custom image picker*/
-                file_picker_callback: function (cb, value, meta) {
-                    var input = document.createElement('input');
-                    input.setAttribute('type', 'file');
-                    input.setAttribute('accept', 'image/*');
-
-                    /*
-                      Note: In modern browsers input[type="file"] is functional without
-                      even adding it to the DOM, but that might not be the case in some older
-                      or quirky browsers like IE, so you might want to add it to the DOM
-                      just in case, and visually hide it. And do not forget do remove it
-                      once you do not need it anymore.
-                    */
-
-                    input.onchange = function () {
-                        var file = this.files[0];
-
-                        var reader = new FileReader();
-                        reader.onload = function () {
-                            /*
-                              Note: Now we need to register the blob in TinyMCEs image blob
-                              registry. In the next release this part hopefully won't be
-                              necessary, as we are looking to handle it internally.
-                            */
-                            var id = 'blobid' + (new Date()).getTime();
-                            var blobCache = tinymce.activeEditor.editorUpload.blobCache;
-                            var base64 = reader.result.split(',')[1];
-                            var blobInfo = blobCache.create(id, file, base64);
-                            blobCache.add(blobInfo);
-
-                            /* call the callback and populate the Title field with the file name */
-                            cb(blobInfo.blobUri(), { title: file.name });
-                        };
-                        reader.readAsDataURL(file);
-                    };
-
-                    input.click();
-                },
-                content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
+        xhr.onload = () => {
+          if (xhr.status === 403) {
+            reject({
+              message: 'HTTP Error: ' + xhr.status,
+              remove: true
             });
+            return;
+          }
 
-        </script>
+          if (xhr.status < 200 || xhr.status >= 300) {
+            console.log(xhr);
+            reject('HTTP Error: ' + xhr.status + ' ' + xhr.statusText);
+            return;
+          }
+
+          const json = JSON.parse(xhr.responseText);
+
+          if (!json || typeof json.location != 'string') {
+            reject('Invalid JSON: ' + xhr.responseText);
+            return;
+          }
+
+          resolve(json.location);
+        };
+
+        xhr.onerror = () => {
+          reject('Image upload failed due to a XHR Transport error. Code: ' + xhr.status);
+        };
+
+        const formData = new FormData();
+        formData.append('file', blobInfo.blob(), blobInfo.filename());
+
+        xhr.send(formData);
+      })
+    });
+
+    // colocar imagem no tinymce
+    const images = document.querySelectorAll('.image');
+    images.forEach(image => {
+      image.addEventListener('click', event => {
+        // tinymce.activeEditor.execCommand('mceInsertContent', false, image.outerHTML);
+        tinymce.get('image').execCommand('mceInsertContent', false, image.outerHTML);
+        // tinymce.activeEditor.setContent(image.outerHTML);
+        console.log(event);
+      })
+    })
+  </script>
 
 
 
@@ -748,11 +763,11 @@
                     <select>
                         <option value="EQUIVASF">EQUIVASF - Liga Acadêmica de Hipiatria</option>
                         <option value="LAAPA">EQUIVASF - Liga Acadêmica de Hipiatria</option>
-                        <option value="LABiClin">LABiClin - Liga Acadêmica de Bioquímica Clinica                        </option>
+                        <option value="LABiClin">LABiClin - Liga Acadêmica de Bioquímica Clinica </option>
                         <option value="opcao2">LACARPA - Liga Acadêmica de Cardiologia de Paulo Afonso</option>
                         <option value="opcao1">LACIPA - Liga Acadêmica de Cirurgia de Paulo Afonso</option>
                         <option value="opcao2">Tipo</option>
-                        
+
 
                     </select>
                 </div>
@@ -934,7 +949,7 @@
         </div>
 
         <div class="has-text-centered">
-            <button class="button is-primary is-large" onclick="window.location.href='index.html';">Voltar</button>
+            <button class="button is-primary is-large" onclick="window.location.href='menuavaliador.php';">Voltar</button>
         </div>
 
         <script>

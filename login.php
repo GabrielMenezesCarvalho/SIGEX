@@ -10,7 +10,7 @@
 	$usuario = $_POST["usuario"];
 	$senha   = $_POST["senha"];
 
-	$sql = "SELECT * FROM usuarios WHERE usuario = '{$usuario}' AND senha  = '{$senha}' ";
+	$sql = "SELECT * FROM usuario WHERE usuario = '{$usuario}' AND senha  = '{$senha}' ";
 
 	$res = $conn->query($sql) or die($conn->error);
 

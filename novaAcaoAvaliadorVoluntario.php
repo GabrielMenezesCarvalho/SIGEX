@@ -68,7 +68,7 @@
 
     <section class="section margem-desktop">
         <div class="container">
-            <h1 class="title has-text-centered has-text-weight-bold">Formulário de Submissão de Ação de Extensão</h1>
+            <h1 class="title has-text-centered has-text-weight-bold">Formulário de Submissão de Ação Voluntária de Extensão</h1>
 
             <br>
 
@@ -346,29 +346,6 @@
             </div>
         </div>
 
-        
-        <div class="field" id="indicadores-sistematica">
-            <label class="label">INDICADORES E SISTEMÁTICA</label>
-            <div class="control">
-                <textarea class="textarea is-fullwidth is-rounded" placeholder="INDICADORES E SISTEMÁTICA"></textarea>
-            </div>
-        </div>
-
-        <div class="field" id="plano-trabalho-coordenador">
-            <label class="label">PLANO DE TRABALHO COORDENADOR</label>
-            <div class="control">
-                <textarea class="textarea is-fullwidth is-rounded"
-                    placeholder="PLANO DE TRABALHO COORDENADOR"></textarea>
-            </div>
-        </div>
-
-        <div class="field" id="plano-trabalho-discentes">
-            <label class="label">PLANO DE TRABALHO DOS DISCENTES</label>
-            <div class="control">
-                <textarea class="textarea is-fullwidth is-rounded"
-                    placeholder="PLANO DE TRABALHO DOS DISCENTES"></textarea>
-            </div>
-        </div>
 
         <div class="field">
             <label class="label">Relação com a Sociedade - Indicadores de Impacto</label>
@@ -1094,32 +1071,7 @@
             // Preencher inicialmente o dropdown de estados
             preencherEstados();
         </script>
-        <script>
-            // Função para mostrar/ocultar os campos com base na seleção do tipo de ação
-            function toggleCamposEdital() {
-                const tipoAcao = document.querySelector('select[name="tipo-acao"]');
-                const indicadoresSistematica = document.getElementById('indicadores-sistematica');
-                const planoTrabalhoCoordenador = document.getElementById('plano-trabalho-coordenador');
-                const planoTrabalhoDiscentes = document.getElementById('plano-trabalho-discentes');
-
-                if (tipoAcao.value === 'Edital') {
-                    indicadoresSistematica.style.display = 'block';
-                    planoTrabalhoCoordenador.style.display = 'block';
-                    planoTrabalhoDiscentes.style.display = 'block';
-                } else {
-                    indicadoresSistematica.style.display = 'none';
-                    planoTrabalhoCoordenador.style.display = 'none';
-                    planoTrabalhoDiscentes.style.display = 'none';
-                }
-            }
-
-            // Adicionar um ouvinte de evento para o campo "Tipo da Ação"
-            const tipoAcaoSelect = document.querySelector('select[name="tipo-acao"]');
-            tipoAcaoSelect.addEventListener('change', toggleCamposEdital);
-
-            // Chamar a função inicialmente para definir o estado inicial
-            toggleCamposEdital();
-        </script>
+        
 
 
 

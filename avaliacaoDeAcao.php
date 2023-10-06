@@ -296,15 +296,15 @@
                     regionais, por meio de propostas, formulação e acompanhamento das políticas públicas?</label>
                 <div class="control">
                     <label class="radio">
-                        <input type="radio" name="contribuicao_desenvolvimento" value="atende">
+                        <input type="radio" name="" value="atende">
                         Atende
                     </label>
                     <label class="radio">
-                        <input type="radio" name="contribuicao_desenvolvimento" value="parcialmente">
+                        <input type="radio" name="" value="parcialmente">
                         Atende Parcialmente
                     </label>
                     <label class="radio">
-                        <input type="radio" name="contribuicao_desenvolvimento" value="nao_atende">
+                        <input type="radio" name="" value="nao_atende">
                         Não Atende
                     </label>
                 </div>
@@ -354,23 +354,23 @@
                 <label class="label">Quanto à estrutura e metodologia a proposta encontra-se:</label>
                 <div class="control">
                     <label class="radio">
-                        <input type="radio" name="estrutura_projeto" value="consistente">
+                        <input type="radio" name="" value="consistente">
                         Consistente
                     </label>
                     <label class="radio">
-                        <input type="radio" name="estrutura_projeto" value="parcialmente">
+                        <input type="radio" name="" value="parcialmente">
                         Parcialmente Consistente
                     </label>
                     <label class="radio">
-                        <input type="radio" name="estrutura_projeto" value="inconsistente">
+                        <input type="radio" name="" value="inconsistente">
                         Inconsistente
                     </label>
                 </div>
             </div>
             <div class="field">
-                <label class="label">Considerações sobre o item “ESTRUTURA DO PROJETO” (opcional)</label>
+                <label class="label">Considerações sobre o item “Estrutura do Projeto” (opcional)</label>
                 <div class="control">
-                    <textarea class="textarea is-fullwidth is-rounded" placeholder="Digite suas considerações sobre o título aqui"></textarea>
+                    <textarea class="textarea is-fullwidth is-rounded" placeholder="Digite suas considerações sobre a estrutura do projeto aqui"></textarea>
                 </div>
             </div>
             <br>
@@ -382,23 +382,23 @@
                     a proposta encontra-se:</label>
                 <div class="control">
                     <label class="radio">
-                        <input type="radio" name="estrutura_projeto" value="consistente">
+                        <input type="radio" name="" value="consistente">
                         Consistente
                     </label>
                     <label class="radio">
-                        <input type="radio" name="estrutura_projeto" value="parcialmente">
+                        <input type="radio" name="" value="parcialmente">
                         Parcialmente Consistente
                     </label>
                     <label class="radio">
-                        <input type="radio" name="estrutura_projeto" value="inconsistente">
+                        <input type="radio" name="" value="inconsistente">
                         Inconsistente
                     </label>
                 </div>
             </div>
             <div class="field">
-                <label class="label">Considerações sobre o item “INTERAÇÃO DO CONHECIMENTO” (opcional)</label>
+                <label class="label">Considerações sobre o item “Interação do conhecimento” (opcional)</label>
                 <div class="control">
-                    <textarea class="textarea is-fullwidth is-rounded" placeholder="Digite suas considerações sobre o título aqui"></textarea>
+                    <textarea class="textarea is-fullwidth is-rounded" placeholder="Digite suas considerações sobre interação do conhecimento aqui"></textarea>
                 </div>
             </div>
             <br>
@@ -410,23 +410,23 @@
                     a proposta encontra-se:</label>
                 <div class="control">
                     <label class="radio">
-                        <input type="radio" name="estrutura_projeto" value="consistente">
+                        <input type="radio" name="" value="consistente">
                         Consistente
                     </label>
                     <label class="radio">
-                        <input type="radio" name="estrutura_projeto" value="parcialmente">
+                        <input type="radio" name="" value="parcialmente">
                         Parcialmente Consistente
                     </label>
                     <label class="radio">
-                        <input type="radio" name="estrutura_projeto" value="inconsistente">
+                        <input type="radio" name="" value="inconsistente">
                         Inconsistente
                     </label>
                 </div>
             </div>
             <div class="field">
-                <label class="label">Considerações sobre o item “PÚBLICO ALVO” (opcional)</label>
+                <label class="label">Considerações sobre o item “Público Alvo” (opcional)</label>
                 <div class="control">
-                    <textarea class="textarea is-fullwidth is-rounded" placeholder="Digite suas considerações sobre o título aqui"></textarea>
+                    <textarea class="textarea is-fullwidth is-rounded" placeholder="Digite suas considerações sobre o público alvo aqui"></textarea>
                 </div>
             </div>
             <br>
@@ -440,23 +440,23 @@
                     suficiente?</label>
                 <div class="control">
                     <label class="radio">
-                        <input type="radio" name="estrutura_projeto" value="sim">
+                        <input type="radio" name="" value="sim">
                         Sim
                     </label>
                     <label class="radio">
-                        <input type="radio" name="estrutura_projeto" value="parcialmente">
+                        <input type="radio" name="" value="parcialmente">
                         Parcialmente
                     </label>
                     <label class="radio">
-                        <input type="radio" name="estrutura_projeto" value="nao">
+                        <input type="radio" name="" value="nao">
                         Não
                     </label>
                 </div>
             </div>
             <div class="field">
-                <label class="label">Considerações sobre o item “CRONOGRAMA” (opcional)</label>
+                <label class="label">Considerações sobre o item “Cronograma” (opcional)</label>
                 <div class="control">
-                    <textarea class="textarea is-fullwidth is-rounded" placeholder="Digite suas considerações sobre o CRONOGRAMA aqui"></textarea>
+                    <textarea class="textarea is-fullwidth is-rounded" placeholder="Digite suas considerações sobre o cronograma aqui"></textarea>
                 </div>
             </div>
             <br>
@@ -470,23 +470,23 @@
                     suficiente?</label>
                 <div class="control">
                     <label class="radio">
-                        <input type="radio" name="estrutura_projeto" value="consistente">
+                        <input type="radio" name="" value="consistente">
                         Consistente
                     </label>
                     <label class="radio">
-                        <input type="radio" name="estrutura_projeto" value="parcialmente">
+                        <input type="radio" name="" value="parcialmente">
                         Parcialmente Consistente
                     </label>
                     <label class="radio">
-                        <input type="radio" name="estrutura_projeto" value="inconsistente">
+                        <input type="radio" name="" value="inconsistente">
                         Inconsistente
                     </label>
                 </div>
             </div>
             <div class="field">
-                <label class="label">Considerações sobre o item “RECURSOS” (opcional)</label>
+                <label class="label">Considerações sobre o item “Recursos” (opcional)</label>
                 <div class="control">
-                    <textarea class="textarea is-fullwidth is-rounded" placeholder="Digite suas considerações sobre oS RECURSOS aqui"></textarea>
+                    <textarea class="textarea is-fullwidth is-rounded" placeholder="Digite suas considerações sobre os recursos aqui"></textarea>
                 </div>
             </div>
             <br>
@@ -498,23 +498,23 @@
                     potenciais para a Sociedade a proposta encontra-se:</label>
                 <div class="control">
                     <label class="radio">
-                        <input type="radio" name="estrutura_projeto" value="consistente">
+                        <input type="radio" name="" value="consistente">
                         Consistente
                     </label>
                     <label class="radio">
-                        <input type="radio" name="estrutura_projeto" value="parcialmente">
+                        <input type="radio" name="" value="parcialmente">
                         Parcialmente Consistente
                     </label>
                     <label class="radio">
-                        <input type="radio" name="estrutura_projeto" value="inconsistente">
+                        <input type="radio" name="" value="inconsistente">
                         Inconsistente
                     </label>
                 </div>
             </div>
             <div class="field">
-                <label class="label">Considerações sobre o item “RESULTADOS ESPERADOS” (opcional)</label>
+                <label class="label">Considerações sobre o item “Resultados esperados” (opcional)</label>
                 <div class="control">
-                    <textarea class="textarea is-fullwidth is-rounded" placeholder="Digite suas considerações sobre oS RESULTADOS ESPERADOS aqui"></textarea>
+                    <textarea class="textarea is-fullwidth is-rounded" placeholder="Digite suas considerações sobre os resultados esperados aqui"></textarea>
                 </div>
             </div>
             <br>
@@ -525,23 +525,23 @@
                 <label class="label">A proposta apresentada realmente trata de atividade de extensão?</label>
                 <div class="control">
                     <label class="radio">
-                        <input type="radio" name="estrutura_projeto" value="sim">
+                        <input type="radio" name="" value="sim">
                         Sim
                     </label>
                     <label class="radio">
-                        <input type="radio" name="estrutura_projeto" value="parcialmente">
+                        <input type="radio" name="" value="parcialmente">
                         Parcialmente
                     </label>
                     <label class="radio">
-                        <input type="radio" name="estrutura_projeto" value="nao">
+                        <input type="radio" name="" value="nao">
                         Não
                     </label>
                 </div>
             </div>
             <div class="field">
-                <label class="label">Considerações sobre o item “EXTENSÃO” (opcional)</label>
+                <label class="label">Considerações sobre o item “Extensão” (opcional)</label>
                 <div class="control">
-                    <textarea class="textarea is-fullwidth is-rounded" placeholder="Digite suas considerações sobre o EXTENSÃO aqui"></textarea>
+                    <textarea class="textarea is-fullwidth is-rounded" placeholder="Digite suas considerações sobre extensão aqui"></textarea>
                 </div>
             </div>
             <br>

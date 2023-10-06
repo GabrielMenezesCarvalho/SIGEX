@@ -16,6 +16,14 @@
       max-height: 80px;
     }
 
+    @media only screen and (max-width: 600px) {
+      .navbar-brand img {
+        width: 100%;
+        height: 100%;
+      }
+
+    }
+
     .user-icon {
       font-size: 35px;
       margin-right: 5px;

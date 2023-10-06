@@ -22,7 +22,7 @@
 		$_SESSION["usuario"] = $usuario;
 		$_SESSION["nome"] = $row->nome;
 		$_SESSION["tipo"] = $row->tipo;
-		print "<script>location.href='dashboard.php';</script>";
+		print "<script>location.href='menuavaliador.php';</script>";
 	}else{
 		unset($usuario);
 		print "<script>alert('Usuário e/ou Senha incorretos!');</script>";

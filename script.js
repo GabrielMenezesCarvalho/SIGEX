@@ -42,7 +42,7 @@ function salvarDados() {
         var rowData = {
             atividade: table.rows[i].cells[0].getElementsByTagName("input")[0].value,
             periodo: table.rows[i].cells[1].getElementsByTagName("input")[0].value,
-            local: table.rows[i].cells[2].getElementsByTagName("input")[0].value,
+            localidade: table.rows[i].cells[2].getElementsByTagName("input")[0].value,
         };
 
         formData.push(rowData);

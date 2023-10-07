@@ -25,9 +25,9 @@ foreach ($dados as $dado) {
 
     $atividade = $conn->real_escape_string($dado['atividade']);
     $periodo = $conn->real_escape_string($dado['periodo']);
-    $local = $conn->real_escape_string($dado['local']);
+    $localidade = $conn->real_escape_string($dado['localidade']);
 
-    $sql = "INSERT INTO tabela_exemplo (nome, sobrenome, endereco, usuario_remetente) VALUES ('$atividade', '$periodo', '$local', '$usuario_remetente')";
+    $sql = "INSERT INTO tabela_exemplo (atividade, periodo, localidade, usuario_remetente) VALUES ('$atividade', '$periodo', '$localidade', '$usuario_remetente')";
 
     if ($conn->query($sql) !== true) {
         echo "Erro na inserção de dados: " . $conn->error;

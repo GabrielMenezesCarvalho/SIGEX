@@ -446,7 +446,7 @@
                             <div class="control"><input type="text" class="input" name="periodo[]" placeholder="Período"></div>
                         </td>
                         <td>
-                            <div class="control"><input type="text" class="input" name="local[]" placeholder="Local"></div>
+                            <div class="control"><input type="text" class="input" name="localidade[]" placeholder="Local"></div>
                         </td>
                     </tr>
                     <!-- Linhas da tabela serão adicionadas aqui dinamicamente -->

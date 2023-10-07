@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
     <script src="https://cdn.tiny.cloud/1/s3zlvxi87b9m37cn8vukivxht0lpogsjccobx1rw0kul8z9u/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <title>Formulário de Submissão de Ação de Extensão</title>
     <style>
         .navbar {
@@ -80,7 +81,7 @@
 
     <section class="section margem-desktop">
 
-        <form method="post" action="processar.php">
+        <form method="post" action="processar.php" onsubmit="return salvarDados()">
             <div class="container">
                 <h1 class="title has-text-centered has-text-weight-bold">Formulário de Submissão de Ação de Extensão</h1>
 
@@ -389,75 +390,78 @@
 
 
 
+
             <div class="field">
                 <h2 class="subtitle">Cronograma de Execução</h2>
             </div>
 
-            <table class="table is-fullwidth" id="cronograma-table">
-                <thead>
-                    <tr>
-                        <th>Início</th>
-                        <th>Fim</th>
-                        <th>Carga Horária Semanal</th>
-                        <th>Carga Horária Total</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>
-                            <div class="control">
-                                <input class="input" type="date">
-                            </div>
-                        </td>
-                        <td>
-                            <div class="control">
-                                <input class="input" type="date">
-                            </div>
-                        </td>
-                        <td>
-                            <div class="control">
-                                <input class="input" type="number" placeholder="Horas">
-                            </div>
-                        </td>
-                        <td>
-                            <div class="control">
-                                <input class="input" type="number" placeholder="Horas">
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="control is-expanded">
-                                <input class="input" type="text" placeholder="Atividades Planejadas">
-                            </div>
-                        </td>
-                        <td>
-                            <div class="control">
-                                <input class="input" type="text" placeholder="Período">
-                            </div>
-                        </td>
-                        <td>
-                            <div class="control">
-                                <input class="input" type="text" placeholder="Local">
-                            </div>
-                        </td>
-                    </tr>
 
-                </tbody>
-            </table>
 
-            <!-- Botão para adicionar nova linha -->
-            <div class="field">
-                <div class="control">
-                    <button type="button" class="button is-primary" id="addRow">Adicionar Linha</button>
+            <div class="field custom-field">
+                <div class="field mr-2">
+                    <label class="label">Início</label>
+                    <div class="control">
+                        <input class="input" type="date" name="inicio">
+                    </div>
+                </div>
+
+                <div class="field mr-2">
+                    <label class="label">Fim</label>
+                    <div class="control">
+                        <input class="input" type="date" name="fim">
+                    </div>
+                </div>
+
+                <div class="field mr-2">
+                    <label class="label">Carga Horária Semanal</label>
+                    <div class="control">
+                        <input class="input" type="number" placeholder="Horas" name="carga_semanal">
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label class="label">Carga Horária Total</label>
+                    <div class="control">
+                        <input class="input" type="number" placeholder="Horas" name="carga_total">
+                    </div>
                 </div>
             </div>
 
 
 
+            <table class="table is-fullwidth" id="dataTable">
+                <thead>
+                    <tr>
+                        <th>Atividades Planejadas</th>
+                        <th>Período</th>
+                        <th>Local</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <div class="control"><input type="text" class="input" name="atividade[]" placeholder="Atividades Planejadas"></div>
+                        </td>
+                        <td>
+                            <div class="control"><input type="text" class="input" name="periodo[]" placeholder="Período"></div>
+                        </td>
+                        <td>
+                            <div class="control"><input type="text" class="input" name="local[]" placeholder="Local"></div>
+                        </td>
+                    </tr>
+                    <!-- Linhas da tabela serão adicionadas aqui dinamicamente -->
+                </tbody>
+            </table>
+
+            <button class="button is-primary" type="button" onclick="adicionarLinha()">Adicionar mais uma atividade</button>
 
 
 
+
+
+
+
+            <br><br>
             <div class="field">
                 <h2 class="subtitle">Equipe de Execução</h2>
             </div>
@@ -889,7 +893,7 @@
             </div>
 
             <div class="has-text-centered">
-                <button class="button is-danger is-large" onclick="window.location.href='menuavaliador.php';">Voltar</button>
+                <button type="button" class="button is-danger is-large" onclick="window.location.href='menuavaliador.php';">Voltar</button>
                 <button type="submit" class="button is-success is-large">Salvar Ação</button>
 
             </div>
@@ -981,31 +985,7 @@
                 tableBody.appendChild(newRow);
             });
         </script>
-        <script>
-                    // Função para adicionar uma nova linha de Atividades Planejadas, Período e Local
-                    document.getElementById('addRow').addEventListener('click', function() {
-                        const tableBody = document.querySelector('#cronograma-table tbody');
-                        const newRow = document.createElement('tr');
-                        newRow.innerHTML = `
-                <td>
-                    <div class="control">
-                        <input class="input" type="text" placeholder="Atividades Planejadas">
-                    </div>
-                </td>
-                <td>
-                    <div class="control">
-                        <input class="input" type="text" placeholder="Período">
-                    </div>
-                </td>
-                <td>
-                    <div class="control">
-                        <input class="input" type="text" placeholder="Local">
-                    </div>
-                </td>
-                  `;
-                        tableBody.appendChild(newRow);
-                    });
-        </script>
+
         <script>
             // Função para preencher o dropdown de estados
             function preencherEstados() {
@@ -1126,6 +1106,11 @@
 
 
     </section>
+
+    <!--Scripts para funcionar o resgate das tabelas-->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="script.js"></script>
 </body>
 
 </html>

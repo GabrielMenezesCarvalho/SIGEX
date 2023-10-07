@@ -20,7 +20,7 @@ $conn->close();
 
 // Função para exibir um Acao
 function exibirAcao($row) {
-    echo "<div class='Acao'>";
+    echo "<div class='box'>";
     exibirCampo('Data de Publicação', $row['data_publicacao']);
     exibirCampo('Nome Completo', $row['nome_completo_avaliador']);
     exibirCampo('CPF do Coordenador', $row['CPF_COORDENADOR']);
@@ -69,6 +69,7 @@ function exibirAcao($row) {
     exibirCampo('Parceria com Outras Instituições', $row['PARCERIA_OUTRA_INSTITUICOES']);
     
     echo "</div>";
+    echo "<br>";
 }
 
 // Função para exibir um campo específico

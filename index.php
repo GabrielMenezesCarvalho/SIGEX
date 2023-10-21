@@ -63,8 +63,8 @@
                 </div>
                 <form action="login.php" method="POST">
                     <div class="form-group">
-                        <label>Usuário</label>
-                        <input type="text" name="usuario" class="form-control">
+                        <label>Email</label>
+                        <input type="text" name="email" class="form-control">
                     </div>
                     <div class="form-group">
                         <label>Senha</label>

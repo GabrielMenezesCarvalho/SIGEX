@@ -29,6 +29,11 @@
             max-width: 100%;
             height: auto;
         }
+
+        /* Adicione uma classe para ocultar os campos inicialmente */
+        .extra-fields {
+            display: none;
+        }
     </style>
 </head>
 
@@ -48,10 +53,6 @@
                         <input type="text" name="nome" class="form-control" required>
                     </div>
                     <div class="form-group">
-                        <label>Usuário</label>
-                        <input type="text" name="usuario" class="form-control" required>
-                    </div>
-                    <div class="form-group">
                         <label>Email</label>
                         <input type="email" name="email" class="form-control" required>
                     </div>
@@ -60,10 +61,30 @@
                         <input type="password" name="senha" class="form-control" required>
                     </div>
                     <div class="form-group">
+                        <label>CPF</label>
+                        <input type="text" name="cpf" class="form-control">
+                    </div>
+                    <div class="form-group extra-fields">
+                        <label>Instituição</label>
+                        <input type="text" name="instituicao" class="form-control">
+                    </div>
+                    <div class="form-group extra-fields">
+                        <label>Formação</label>
+                        <select name="formacao" class="form-control">
+                            <option value="fundamental">Fundamental</option>
+                            <option value="medio">Médio</option>
+                            <option value="tecnico">Técnico</option>
+                            <option value="graduacao">Graduação</option>
+                            <option value="posgraduacao">Pós-Graduação</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
                         <label>Tipo</label>
-                        <select name="tipo" class="form-control" required>
+                        <select name="tipo" class="form-control" id="tipoUsuario" required>
                             <option value="1">Discente</option>
                             <option value="2">Docente/Técnico</option>
+                            <option value="3">Técnico</option>
+                            <option value="4">Colaborador Externo</option>
                         </select>
                     </div>
 
@@ -72,11 +93,25 @@
                         <button type="submit" class="btn btn-success btn-block">Cadastrar</button>
                     </div>
                 </form>
+
+                <!-- Adicione o script JavaScript -->
+                <script>
+                    // Obtém o elemento select
+                    var tipoUsuarioSelect = document.getElementById('tipoUsuario');
+                    // Obtém os elementos dos campos adicionais
+                    var camposExtras = document.querySelectorAll('.extra-fields');
+
+                    // Adiciona um ouvinte de eventos ao select
+                    tipoUsuarioSelect.addEventListener('change', function () {
+                        // Mostra ou oculta os campos adicionais com base na seleção
+                        camposExtras.forEach(function (campo) {
+                            campo.style.display = tipoUsuarioSelect.value === '4' ? 'block' : 'none';
+                        });
+                    });
+                </script>
             </div>
         </div>
     </div>
-
-    
 </body>
 
 </html>

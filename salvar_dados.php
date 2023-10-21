@@ -1,4 +1,5 @@
 <?php
+/*
 // Iniciar a sessão
 session_start();
 
@@ -36,4 +37,5 @@ foreach ($dados as $dado) {
 
 // Fechar a conexão com o banco de dados
 $conn->close();
+*/
 ?>

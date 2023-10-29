@@ -78,7 +78,7 @@
             </div>
         </div>
     </nav>
-    
+
     <section class="section margem-desktop">
 
         <form method="post" action="processar.php" onsubmit="return salvarDados()">
@@ -388,38 +388,38 @@
 
 
             <div class="field">
-    <h2 class="subtitle">Cronograma de Execução</h2>
-</div>
+                <h2 class="subtitle">Cronograma de Execução</h2>
+            </div>
 
-<div class="field custom-field">
-    <div class="field mr-2">
-        <label class="label">Início</label>
-        <div class="control">
-            <input class="input" type="date" name="inicio">
-        </div>
-    </div>
+            <div class="field custom-field">
+                <div class="field mr-2">
+                    <label class="label">Início</label>
+                    <div class="control">
+                        <input class="input" type="date" name="inicio">
+                    </div>
+                </div>
 
-    <div class="field mr-2">
-        <label class="label">Fim</label>
-        <div class="control">
-            <input class="input" type="date" name="fim">
-        </div>
-    </div>
+                <div class="field mr-2">
+                    <label class="label">Fim</label>
+                    <div class="control">
+                        <input class="input" type="date" name="fim">
+                    </div>
+                </div>
 
-    <div class="field mr-2">
-        <label class="label">Carga Horária Semanal</label>
-        <div class="control">
-            <input class="input" type="number" placeholder="Horas" name="carga_semanal">
-        </div>
-    </div>
+                <div class="field mr-2">
+                    <label class="label">Carga Horária Semanal</label>
+                    <div class="control">
+                        <input class="input" type="number" placeholder="Horas" name="carga_semanal">
+                    </div>
+                </div>
 
-    <div class="field">
-        <label class="label">Carga Horária Total</label>
-        <div class="control">
-            <input class="input" type="number" placeholder="Horas" name="carga_total">
-        </div>
-    </div>
-</div>
+                <div class="field">
+                    <label class="label">Carga Horária Total</label>
+                    <div class="control">
+                        <input class="input" type="number" placeholder="Horas" name="carga_total">
+                    </div>
+                </div>
+            </div>
 
 
 
@@ -444,9 +444,10 @@
                             <div class="control"><input type="text" class="input" name="localidade[]" placeholder="Local"></div>
                         </td>
                     </tr>
-                    <!-- Linhas da tabela serão adicionadas aqui dinamicamente -->
+
                 </tbody>
             </table>
+
 
             <button class="button is-primary" type="button" onclick="adicionarLinha()">Adicionar mais uma atividade</button>
 
@@ -457,65 +458,60 @@
 
 
             <br><br>
-            <div class="field">
-                <h2 class="subtitle">Equipe de Execução</h2>
-            </div>
 
 
 
-            <table class="table is-fullwidth" id="equipe-execucao-table">
-                <thead>
-                    <tr>
-                        <th>Nome Completo</th>
-                        <th>CPF</th>
-                        <th>Instituição</th>
-                        <th>Colegiado/Setor</th>
-                        <th>Categoria Profissional</th>
-                        <th>Função no Projeto</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>
-                            <div class="control">
-                                <input class="input" type="text" placeholder="Nome Completo">
-                            </div>
-                        </td>
-                        <td>
-                            <div class="control">
-                                <input class="input" type="text" placeholder="CPF">
-                            </div>
-                        </td>
-                        <td>
-                            <div class="control">
-                                <input class="input" type="text" placeholder="Instituição">
-                            </div>
-                        </td>
-                        <td>
-                            <div class="control">
-                                <input class="input" type="text" placeholder="Colegiado/Setor">
-                            </div>
-                        </td>
-                        <td>
-                            <div class="control">
-                                <input class="input" type="text" placeholder="Categoria Profissional">
-                            </div>
-                        </td>
-                        <td>
-                            <div class="control">
-                                <input class="input" type="text" placeholder="Função no Projeto">
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+            <div id="equipe-execucao">
+    <h2 class="subtitle">Equipe de Execução</h2>
+    <table class="table is-fullwidth">
+        <thead>
+            <tr>
+                <th>Nome Completo</th>
+                <th>CPF</th>
+                <th>Instituição</th>
+                <th>Colegiado/Setor</th>
+                <th>Categoria Profissional</th>
+                <th>Função no Projeto</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="member">
+                <td><input class="input" type="text" name="equipe_execucao[nome_completo][]" placeholder="Nome Completo"></td>
+                <td><input class="input" type="text" name="equipe_execucao[cpf][]" placeholder="CPF"></td>
+                <td><input class="input" type="text" name="equipe_execucao[instituicao][]" placeholder="Instituição"></td>
+                <td><input class="input" type="text" name="equipe_execucao[colegiado_setor][]" placeholder="Colegiado/Setor"></td>
+                <td><input class="input" type="text" name="equipe_execucao[categoria_profissional][]" placeholder="Categoria Profissional"></td>
+                <td><input class="input" type="text" name="equipe_execucao[funcao_projeto][]" placeholder="Função no Projeto"></td>
+            </tr>
+        </tbody>
+    </table>
 
-            <!-- Botão para adicionar nova linha -->
-            <div class="field">
-                <div class="control">
-                    <button type="button" class="button is-primary" id="addEquipeExecucaoRow">Adicionar Linha</button>
-                </div>
-            </div>
+    <!-- Botão para adicionar novo membro da equipe -->
+    <button class="button is-primary" type="button" id="addEquipeExecucaoMember">Adicionar Membro</button>
+</div>
+
+<!-- ... Outros campos do formulário ... -->
+
+<script>
+    document.getElementById('addEquipeExecucaoMember').addEventListener('click', function() {
+        const equipeExecucaoTableBody = document.querySelector('#equipe-execucao table tbody');
+        const newMemberRow = document.createElement('tr');
+        newMemberRow.classList.add('member');
+        const fields = ['nome_completo', 'cpf', 'instituicao', 'colegiado_setor', 'categoria_profissional', 'funcao_projeto'];
+        fields.forEach(field => {
+            const cell = document.createElement('td');
+            const input = document.createElement('input');
+            input.className = 'input';
+            input.type = 'text';
+            input.name = `equipe_execucao[${field}][]`;
+            input.placeholder = field.replace('_', ' ').replace(/\b\w/g, l => l.toUpperCase());
+            cell.appendChild(input);
+            newMemberRow.appendChild(cell);
+        });
+        equipeExecucaoTableBody.appendChild(newMemberRow);
+    });
+</script>
+
 
 
 
@@ -940,46 +936,8 @@
                 input.addEventListener('input', calcularTotalCustos);
             });
         </script>
-        <script>
-            // Função para adicionar uma nova linha na tabela da equipe de execução
-            document.getElementById('addEquipeExecucaoRow').addEventListener('click', function() {
-                const tableBody = document.querySelector('#equipe-execucao-table tbody');
-                const newRow = document.createElement('tr');
-                newRow.innerHTML = `
-                    <td>
-                        <div class="control">
-                            <input class="input" type="text" placeholder="Nome Completo">
-                        </div>
-                    </td>
-                    <td>
-                        <div class="control">
-                            <input class="input" type="text" placeholder="CPF">
-                        </div>
-                    </td>
-                    <td>
-                        <div class="control">
-                            <input class="input" type="text" placeholder="Instituição">
-                        </div>
-                    </td>
-                    <td>
-                        <div class="control">
-                            <input class="input" type="text" placeholder="Colegiado/Setor">
-                        </div>
-                    </td>
-                    <td>
-                        <div class="control">
-                            <input class="input" type="text" placeholder="Categoria Profissional">
-                        </div>
-                    </td>
-                    <td>
-                        <div class="control">
-                            <input class="input" type="text" placeholder="Função no Projeto">
-                        </div>
-                    </td>
-                `;
-                tableBody.appendChild(newRow);
-            });
-        </script>
+
+
 
         <script>
             // Função para preencher o dropdown de estados

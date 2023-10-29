@@ -147,8 +147,68 @@ $stmt->bind_param(
 );
 
 if ($stmt->execute()) {
-    echo "<script>alert('Ação salva com sucesso.'); window.location.href = 'novaAcaoAvaliador.php';</script>";
-    exit;
+    // Obter o ID da ação recém-inserida
+    $id_acao = $stmt->insert_id;
+
+    // Inserir as atividades planejadas
+    $atividades = $_POST['atividade'];
+    $periodos = $_POST['periodo'];
+    $locais = $_POST['localidade'];
+
+    // Verificar se as arrays têm o mesmo comprimento
+    if (!empty($atividades) && count($atividades) == count($periodos) && count($atividades) == count($locais)) {
+        $sql_atividades = "INSERT INTO atividades_planejadas (id_acao, atividade, periodo, localidade) VALUES (?, ?, ?, ?)";
+        $stmt_atividades = $conn->prepare($sql_atividades);
+
+        // Verificar se a preparação da consulta foi bem-sucedida
+        if (!$stmt_atividades) {
+            echo "Erro na preparação da consulta de atividades_planejadas: " . $conn->error;
+            exit;
+        }
+
+        // Iterar sobre as atividades e inserir na tabela atividades_planejadas
+        for ($i = 0; $i < count($atividades); $i++) {
+            $stmt_atividades->bind_param("isss", $id_acao, $atividades[$i], $periodos[$i], $locais[$i]);
+            $stmt_atividades->execute();
+        }
+
+        $stmt_atividades->close();
+    } else {
+        echo "<script>
+            alert('Erro: As arrays de atividades, períodos e locais não têm o mesmo comprimento.');
+        </script>";
+        echo "Count Atividades: " . count($atividades) . " / Count Períodos: " . count($periodos) . " / Count Locais: " . count($locais);
+    }
+
+    $equipe_execucao = $_POST['equipe_execucao'];
+
+    if (!empty($equipe_execucao['nome_completo']) && is_array($equipe_execucao['nome_completo']) && count($equipe_execucao['nome_completo']) > 0) {
+        $sql_equipe = "INSERT INTO equipe_execucao (id_acao, nome_completo, cpf, instituicao, colegiado_setor, categoria_profissional, funcao_projeto) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        $stmt_equipe = $conn->prepare($sql_equipe);
+
+        if (!$stmt_equipe) {
+            echo "Erro na preparação da consulta de equipe_execucao: " . $conn->error;
+            exit;
+        }
+
+        foreach ($equipe_execucao['nome_completo'] as $index => $nome_completo) {
+            $stmt_equipe->bind_param(
+                "issssss",
+                $id_acao,
+                $nome_completo,
+                $equipe_execucao['cpf'][$index],
+                $equipe_execucao['instituicao'][$index],
+                $equipe_execucao['colegiado_setor'][$index],
+                $equipe_execucao['categoria_profissional'][$index],
+                $equipe_execucao['funcao_projeto'][$index]
+            );
+            $stmt_equipe->execute();
+        }
+
+        $stmt_equipe->close();
+    } else {
+        echo "<script>alert('Erro: A equipe de execução não foi fornecida ou está vazia.');</script>";
+    }
 } else {
     echo "<script>alert('Erro ao salvar a ação: " . $stmt->error . "');</script>";
     echo "Erro: " . $stmt->error;

@@ -90,9 +90,7 @@ $sql = "INSERT INTO acoes_edital (
     fim,
     carga_semanal,
     carga_total
-
 ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-
 
 $stmt = $conn->prepare($sql);
 
@@ -123,9 +121,9 @@ $stmt->bind_param(
     $INTRODUCAO,
     $JUSTIFICATIVA,
     $OBJETIVOS_METAS,
-    $RESULTADOS_ESPERADOS, 
-    $ARTICULACAO_ENSINO, 
-    $INDICADORES_SISTEMATICA, 
+    $RESULTADOS_ESPERADOS,
+    $ARTICULACAO_ENSINO,
+    $INDICADORES_SISTEMATICA,
     $PLANO_TRABALHO_COORDENADOR,
     $PLANO_TRABALHO_DISCENTE,
     $RELACAO_SOCIEDADE,
@@ -134,7 +132,7 @@ $stmt->bind_param(
     $ABRANGENCIA,
     $VINCULO_LIGA,
     $VINCULO_EMPRESAJR,
-    $BENEFICIA_GRUPOVUNERAVEL, 
+    $BENEFICIA_GRUPOVUNERAVEL,
     $APROVADA_FOMENTO_PUBLICO,
     $PARCERIA_OUTRA_INSTITUICOES,
     $publico_interno_descricao,
@@ -146,18 +144,54 @@ $stmt->bind_param(
     $fim,
     $carga_semanal,
     $carga_total
-
 );
 
-
 if ($stmt->execute()) {
-    echo "<script>alert('Ação salva com sucesso.'); window.location.href = 'novaAcaoAvaliador.php';</script>";
+    // Obter o ID da ação recém-inserida
+    $id_acao = $stmt->insert_id;
+
+    // Inserir as atividades planejadas
+    $atividades = $_POST['atividade'];
+    $periodos = $_POST['periodo'];
+    $locais = $_POST['localidade'];
+
+    // Verificar se as arrays têm o mesmo comprimento
+    if (!empty($atividades) && count($atividades) == count($periodos) && count($atividades) == count($locais)) {
+        $sql_atividades = "INSERT INTO atividades_planejadas (id_acao, atividade, periodo, localidade) VALUES (?, ?, ?, ?)";
+        $stmt_atividades = $conn->prepare($sql_atividades);
+
+        // Verificar se a preparação da consulta foi bem-sucedida
+        if (!$stmt_atividades) {
+            echo "Erro na preparação da consulta de atividades_planejadas: " . $conn->error;
+            exit;
+        }
+
+        // Iterar sobre as atividades e inserir na tabela atividades_planejadas
+        for ($i = 0; $i < count($atividades); $i++) {
+            $stmt_atividades->bind_param("isss", $id_acao, $atividades[$i], $periodos[$i], $locais[$i]);
+            $stmt_atividades->execute();
+        }
+
+        $stmt_atividades->close();
+        echo "<script>
+            alert('Ação salva com sucesso.');
+            window.location.href = 'novaAcaoAvaliador.php';
+        </script>";
+        exit;
+    } else {
+        echo "<script>
+            alert('Erro: As arrays de atividades, períodos e locais não têm o mesmo comprimento.');
+        </script>";
+        echo "Count Atividades: " . count($atividades) . " / Count Períodos: " . count($periodos) . " / Count Locais: " . count($locais);
+    }
+
+    echo "<script>alert('Ação salva com sucesso.');</script>";
     exit;
 } else {
     echo "<script>alert('Erro ao salvar a ação: " . $stmt->error . "');</script>";
-    // Adicione uma mensagem de depuração para ver detalhes do erro no console do navegador
     echo "Erro: " . $stmt->error;
 }
 
 $stmt->close();
 $conn->close();
+?>

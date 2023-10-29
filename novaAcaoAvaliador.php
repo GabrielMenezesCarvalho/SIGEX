@@ -78,7 +78,7 @@
             </div>
         </div>
     </nav>
-    
+
     <section class="section margem-desktop">
 
         <form method="post" action="processar.php" onsubmit="return salvarDados()">
@@ -388,38 +388,38 @@
 
 
             <div class="field">
-    <h2 class="subtitle">Cronograma de Execução</h2>
-</div>
+                <h2 class="subtitle">Cronograma de Execução</h2>
+            </div>
 
-<div class="field custom-field">
-    <div class="field mr-2">
-        <label class="label">Início</label>
-        <div class="control">
-            <input class="input" type="date" name="inicio">
-        </div>
-    </div>
+            <div class="field custom-field">
+                <div class="field mr-2">
+                    <label class="label">Início</label>
+                    <div class="control">
+                        <input class="input" type="date" name="inicio">
+                    </div>
+                </div>
 
-    <div class="field mr-2">
-        <label class="label">Fim</label>
-        <div class="control">
-            <input class="input" type="date" name="fim">
-        </div>
-    </div>
+                <div class="field mr-2">
+                    <label class="label">Fim</label>
+                    <div class="control">
+                        <input class="input" type="date" name="fim">
+                    </div>
+                </div>
 
-    <div class="field mr-2">
-        <label class="label">Carga Horária Semanal</label>
-        <div class="control">
-            <input class="input" type="number" placeholder="Horas" name="carga_semanal">
-        </div>
-    </div>
+                <div class="field mr-2">
+                    <label class="label">Carga Horária Semanal</label>
+                    <div class="control">
+                        <input class="input" type="number" placeholder="Horas" name="carga_semanal">
+                    </div>
+                </div>
 
-    <div class="field">
-        <label class="label">Carga Horária Total</label>
-        <div class="control">
-            <input class="input" type="number" placeholder="Horas" name="carga_total">
-        </div>
-    </div>
-</div>
+                <div class="field">
+                    <label class="label">Carga Horária Total</label>
+                    <div class="control">
+                        <input class="input" type="number" placeholder="Horas" name="carga_total">
+                    </div>
+                </div>
+            </div>
 
 
 
@@ -444,9 +444,10 @@
                             <div class="control"><input type="text" class="input" name="localidade[]" placeholder="Local"></div>
                         </td>
                     </tr>
-                    <!-- Linhas da tabela serão adicionadas aqui dinamicamente -->
+
                 </tbody>
             </table>
+
 
             <button class="button is-primary" type="button" onclick="adicionarLinha()">Adicionar mais uma atividade</button>
 

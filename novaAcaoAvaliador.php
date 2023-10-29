@@ -78,7 +78,7 @@
             </div>
         </div>
     </nav>
-
+    
     <section class="section margem-desktop">
 
         <form method="post" action="processar.php" onsubmit="return salvarDados()">
@@ -335,30 +335,25 @@
 
             <!-- Início das tabelas -->
 
+            <!-- Dentro do formulário -->
             <div class="field">
                 <h2 class="subtitle">Público-Alvo e Número de Pessoas Beneficiadas</h2>
             </div>
 
             <div class="field">
                 <table class="table is-fullwidth">
-                    <thead>
-                        <tr>
-                            <th>Público-Alvo</th>
-                            <th>Descrição</th>
-                            <th>Previsão do Nº de Pessoas Beneficiadas</th>
-                        </tr>
-                    </thead>
+                    <!-- ... (Cabeçalho da tabela) -->
                     <tbody>
                         <tr>
                             <td>Publico interno</td>
                             <td>
                                 <div class="control">
-                                    <input class="input" type="text" placeholder="Descrição do público interno">
+                                    <input class="input" type="text" name="publico_interno_descricao" placeholder="Descrição do público interno">
                                 </div>
                             </td>
                             <td>
                                 <div class="control">
-                                    <input class="input" type="number" placeholder="Número de pessoas">
+                                    <input class="input" type="number" name="publico_interno_numero" placeholder="Número de pessoas">
                                 </div>
                             </td>
                         </tr>
@@ -366,12 +361,12 @@
                             <td>Publico Externo</td>
                             <td>
                                 <div class="control">
-                                    <input class="input" type="text" placeholder="Descrição do público externo">
+                                    <input class="input" type="text" name="publico_externo_descricao" placeholder="Descrição do público externo">
                                 </div>
                             </td>
                             <td>
                                 <div class="control">
-                                    <input class="input" type="number" placeholder="Número de pessoas">
+                                    <input class="input" type="number" name="publico_externo_numero" placeholder="Número de pessoas">
                                 </div>
                             </td>
                         </tr>
@@ -380,7 +375,7 @@
                             <td></td>
                             <td>
                                 <div class="control">
-                                    <input class="input" type="number" placeholder="Número de pessoas">
+                                    <input class="input" type="number" name="total_pessoas_beneficiadas" placeholder="Número total de pessoas">
                                 </div>
                             </td>
                         </tr>
@@ -391,41 +386,41 @@
 
 
 
+
             <div class="field">
-                <h2 class="subtitle">Cronograma de Execução</h2>
-            </div>
+    <h2 class="subtitle">Cronograma de Execução</h2>
+</div>
 
+<div class="field custom-field">
+    <div class="field mr-2">
+        <label class="label">Início</label>
+        <div class="control">
+            <input class="input" type="date" name="inicio">
+        </div>
+    </div>
 
+    <div class="field mr-2">
+        <label class="label">Fim</label>
+        <div class="control">
+            <input class="input" type="date" name="fim">
+        </div>
+    </div>
 
-            <div class="field custom-field">
-                <div class="field mr-2">
-                    <label class="label">Início</label>
-                    <div class="control">
-                        <input class="input" type="date" name="inicio">
-                    </div>
-                </div>
+    <div class="field mr-2">
+        <label class="label">Carga Horária Semanal</label>
+        <div class="control">
+            <input class="input" type="number" placeholder="Horas" name="carga_semanal">
+        </div>
+    </div>
 
-                <div class="field mr-2">
-                    <label class="label">Fim</label>
-                    <div class="control">
-                        <input class="input" type="date" name="fim">
-                    </div>
-                </div>
+    <div class="field">
+        <label class="label">Carga Horária Total</label>
+        <div class="control">
+            <input class="input" type="number" placeholder="Horas" name="carga_total">
+        </div>
+    </div>
+</div>
 
-                <div class="field mr-2">
-                    <label class="label">Carga Horária Semanal</label>
-                    <div class="control">
-                        <input class="input" type="number" placeholder="Horas" name="carga_semanal">
-                    </div>
-                </div>
-
-                <div class="field">
-                    <label class="label">Carga Horária Total</label>
-                    <div class="control">
-                        <input class="input" type="number" placeholder="Horas" name="carga_total">
-                    </div>
-                </div>
-            </div>
 
 
 

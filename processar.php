@@ -36,6 +36,16 @@ $BENEFICIA_GRUPOVUNERAVEL = $_POST['BENEFICIA_GRUPOVUNERAVEL'];
 $APROVADA_FOMENTO_PUBLICO = $_POST['APROVADA_FOMENTO_PUBLICO'];
 $PARCERIA_OUTRA_INSTITUICOES = $_POST['PARCERIA_OUTRA_INSTITUICOES'];
 
+// Novos campos para o público-alvo e número de pessoas beneficiadas
+$publico_interno_descricao = $_POST['publico_interno_descricao'];
+$publico_interno_numero = $_POST['publico_interno_numero'];
+$publico_externo_descricao = $_POST['publico_externo_descricao'];
+$publico_externo_numero = $_POST['publico_externo_numero'];
+$total_pessoas_beneficiadas = $_POST['total_pessoas_beneficiadas'];
+$inicio = $_POST['inicio'];
+$fim = $_POST['fim'];
+$carga_semanal = $_POST['carga_semanal'];
+$carga_total = $_POST['carga_total'];
 
 $sql = "INSERT INTO acoes_edital (
     titulo,
@@ -70,9 +80,18 @@ $sql = "INSERT INTO acoes_edital (
     VINCULO_EMPRESAJR,
     BENEFICIA_GRUPOVUNERAVEL,
     APROVADA_FOMENTO_PUBLICO,
-    PARCERIA_OUTRA_INSTITUICOES
+    PARCERIA_OUTRA_INSTITUICOES,
+    publico_interno_descricao,
+    publico_interno_numero,
+    publico_externo_descricao,
+    publico_externo_numero,
+    total_pessoas_beneficiadas,
+    inicio,
+    fim,
+    carga_semanal,
+    carga_total
 
-) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
 
 $stmt = $conn->prepare($sql);
@@ -84,7 +103,7 @@ if (!$stmt) {
 }
 
 $stmt->bind_param(
-    "sssssssssssssssssssssssssssssssss",
+    "ssssssssssssssssssssssssssssssssssssssssii",
     $titulo,
     $metodologia,
     $referencias,
@@ -117,7 +136,17 @@ $stmt->bind_param(
     $VINCULO_EMPRESAJR,
     $BENEFICIA_GRUPOVUNERAVEL, 
     $APROVADA_FOMENTO_PUBLICO,
-    $PARCERIA_OUTRA_INSTITUICOES
+    $PARCERIA_OUTRA_INSTITUICOES,
+    $publico_interno_descricao,
+    $publico_interno_numero,
+    $publico_externo_descricao,
+    $publico_externo_numero,
+    $total_pessoas_beneficiadas,
+    $inicio,
+    $fim,
+    $carga_semanal,
+    $carga_total
+
 );
 
 

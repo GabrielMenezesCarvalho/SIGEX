@@ -59,6 +59,30 @@ function exibirAcao($row) {
     exibirCampo('Relação com a Sociedade', $row['RELACAO_SOCIEDADE']);
     exibirCampo('Referências Bibliográficas', $row['referencias']);
 
+
+
+    exibirCampo('Descrição do Público Interno', $row['publico_interno_descricao']);
+    exibirCampo('Total de Público Interno', $row['publico_interno_numero']);
+    exibirCampo('Descrição do Público Externo', $row['publico_externo_descricao']);
+    exibirCampo('Total de Público Externo', $row['publico_externo_numero']);
+
+    echo "<br>";
+    echo"<div class='campo'><strong>Cronogrma de Execução</strong></div>";
+    echo "<br>";
+
+    exibirCampo('Inicio', $row['inicio']);
+    exibirCampo('Fim', $row['fim']);
+    exibirCampo('Carga Semanal', $row['carga_semanal']);
+    exibirCampo('Carga Total', $row['carga_total']);
+    echo "<br>";
+    
+    
+    
+
+
+
+    
+
     exibirCampo('PPC', $row['PPC']);
     exibirCampo('Anuência', $row['ANUENCIA']);
     exibirCampo('Abrangência', $row['ABRANGENCIA']);

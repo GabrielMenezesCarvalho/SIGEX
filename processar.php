@@ -209,9 +209,56 @@ if ($stmt->execute()) {
     } else {
         echo "<script>alert('Erro: A equipe de execução não foi fornecida ou está vazia.');</script>";
     }
+    // Inserir proposta orçamentária
+$stmt_proposta = null;  // Inicializar $stmt_proposta fora do bloco condicional
+
+if (is_array($_POST['proposta_orcamentaria'])) {
+    $propostas_orcamentarias = $_POST['proposta_orcamentaria'];
+
+    // Não é mais necessário verificar 'recurso'
+    $sql_proposta = "INSERT INTO proposta_orcamentaria (id_acao, recurso, justificativas, custos_previstos, origem_recurso) VALUES (?, ?, ?, ?, ?)";
+    $stmt_proposta = $conn->prepare($sql_proposta);
+
+    if (!$stmt_proposta) {
+        echo "Erro na preparação da consulta de proposta_orcamentaria: " . $conn->error;
+        exit;
+    }
+
+    // Array de valores padrão para 'recurso'
+    $recursos_padrao = array("Bolsa de Extensão", "Material de Consumo", "Outros Serviços de Terceiros Pessoa Jurídica", "Outras Despesas");
+
+    foreach ($propostas_orcamentarias['justificativas'] as $index => $justificativa) {
+        $custo_previsto = $propostas_orcamentarias['custos_previstos'][$index];
+        $origem_recurso = $propostas_orcamentarias['origem_recurso'][$index];
+
+        // Obtém o valor padrão correspondente ao índice atual
+        $recurso_padrao = $recursos_padrao[$index];
+
+        if (!$stmt_proposta->bind_param("sssds", $id_acao, $recurso_padrao, $justificativa, $custo_previsto, $origem_recurso)) {
+            echo "Erro ao vincular parâmetros: " . $stmt_proposta->error;
+            exit;
+        }
+        
+        
+        if (!$stmt_proposta->execute()) {
+            echo "Erro ao executar a consulta de proposta_orcamentaria: " . $stmt_proposta->error;
+            exit;
+        }
+    }
+} else {
+    echo "<script>alert('Erro: A chave proposta_orcamentaria não está presente no array \$_POST.');</script>";
+}
+
+// Fechar a declaração apenas se ela foi criada
+if ($stmt_proposta) {
+    $stmt_proposta->close();
+}
+echo "<script>alert('Ação salva com sucesso!');</script>";
+echo '<script>window.location.href = "novaAcaoAvaliador.php";</script>';
+
+
 } else {
     echo "<script>alert('Erro ao salvar a ação: " . $stmt->error . "');</script>";
-    echo "Erro: " . $stmt->error;
 }
 
 $stmt->close();

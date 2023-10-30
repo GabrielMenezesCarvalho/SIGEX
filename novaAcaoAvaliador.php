@@ -462,55 +462,55 @@
 
 
             <div id="equipe-execucao">
-    <h2 class="subtitle">Equipe de Execução</h2>
-    <table class="table is-fullwidth">
-        <thead>
-            <tr>
-                <th>Nome Completo</th>
-                <th>CPF</th>
-                <th>Instituição</th>
-                <th>Colegiado/Setor</th>
-                <th>Categoria Profissional</th>
-                <th>Função no Projeto</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr class="member">
-                <td><input class="input" type="text" name="equipe_execucao[nome_completo][]" placeholder="Nome Completo"></td>
-                <td><input class="input" type="text" name="equipe_execucao[cpf][]" placeholder="CPF"></td>
-                <td><input class="input" type="text" name="equipe_execucao[instituicao][]" placeholder="Instituição"></td>
-                <td><input class="input" type="text" name="equipe_execucao[colegiado_setor][]" placeholder="Colegiado/Setor"></td>
-                <td><input class="input" type="text" name="equipe_execucao[categoria_profissional][]" placeholder="Categoria Profissional"></td>
-                <td><input class="input" type="text" name="equipe_execucao[funcao_projeto][]" placeholder="Função no Projeto"></td>
-            </tr>
-        </tbody>
-    </table>
+                <h2 class="subtitle">Equipe de Execução</h2>
+                <table class="table is-fullwidth">
+                    <thead>
+                        <tr>
+                            <th>Nome Completo</th>
+                            <th>CPF</th>
+                            <th>Instituição</th>
+                            <th>Colegiado/Setor</th>
+                            <th>Categoria Profissional</th>
+                            <th>Função no Projeto</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="member">
+                            <td><input class="input" type="text" name="equipe_execucao[nome_completo][]" placeholder="Nome Completo"></td>
+                            <td><input class="input" type="text" name="equipe_execucao[cpf][]" placeholder="CPF"></td>
+                            <td><input class="input" type="text" name="equipe_execucao[instituicao][]" placeholder="Instituição"></td>
+                            <td><input class="input" type="text" name="equipe_execucao[colegiado_setor][]" placeholder="Colegiado/Setor"></td>
+                            <td><input class="input" type="text" name="equipe_execucao[categoria_profissional][]" placeholder="Categoria Profissional"></td>
+                            <td><input class="input" type="text" name="equipe_execucao[funcao_projeto][]" placeholder="Função no Projeto"></td>
+                        </tr>
+                    </tbody>
+                </table>
 
-    <!-- Botão para adicionar novo membro da equipe -->
-    <button class="button is-primary" type="button" id="addEquipeExecucaoMember">Adicionar Membro</button>
-</div>
+                <!-- Botão para adicionar novo membro da equipe -->
+                <button class="button is-primary" type="button" id="addEquipeExecucaoMember">Adicionar Membro</button>
+            </div>
 
-<!-- ... Outros campos do formulário ... -->
+            <!-- ... Outros campos do formulário ... -->
 
-<script>
-    document.getElementById('addEquipeExecucaoMember').addEventListener('click', function() {
-        const equipeExecucaoTableBody = document.querySelector('#equipe-execucao table tbody');
-        const newMemberRow = document.createElement('tr');
-        newMemberRow.classList.add('member');
-        const fields = ['nome_completo', 'cpf', 'instituicao', 'colegiado_setor', 'categoria_profissional', 'funcao_projeto'];
-        fields.forEach(field => {
-            const cell = document.createElement('td');
-            const input = document.createElement('input');
-            input.className = 'input';
-            input.type = 'text';
-            input.name = `equipe_execucao[${field}][]`;
-            input.placeholder = field.replace('_', ' ').replace(/\b\w/g, l => l.toUpperCase());
-            cell.appendChild(input);
-            newMemberRow.appendChild(cell);
-        });
-        equipeExecucaoTableBody.appendChild(newMemberRow);
-    });
-</script>
+            <script>
+                document.getElementById('addEquipeExecucaoMember').addEventListener('click', function() {
+                    const equipeExecucaoTableBody = document.querySelector('#equipe-execucao table tbody');
+                    const newMemberRow = document.createElement('tr');
+                    newMemberRow.classList.add('member');
+                    const fields = ['nome_completo', 'cpf', 'instituicao', 'colegiado_setor', 'categoria_profissional', 'funcao_projeto'];
+                    fields.forEach(field => {
+                        const cell = document.createElement('td');
+                        const input = document.createElement('input');
+                        input.className = 'input';
+                        input.type = 'text';
+                        input.name = `equipe_execucao[${field}][]`;
+                        input.placeholder = field.replace('_', ' ').replace(/\b\w/g, l => l.toUpperCase());
+                        cell.appendChild(input);
+                        newMemberRow.appendChild(cell);
+                    });
+                    equipeExecucaoTableBody.appendChild(newMemberRow);
+                });
+            </script>
 
 
 
@@ -537,17 +537,17 @@
                         <td>Bolsa de Extensão</td>
                         <td>
                             <div class="control">
-                                <input class="input" type="text" placeholder="Justificativas">
+                                <input class="input" type="text" name="proposta_orcamentaria[justificativas][]" placeholder="Justificativas">
                             </div>
                         </td>
                         <td>
                             <div class="control">
-                                <input class="input custo-previsto" type="number" placeholder="Custos Previstos">
+                                <input class="input custo-previsto" type="number" name="proposta_orcamentaria[custos_previstos][]" placeholder="Custos Previstos">
                             </div>
                         </td>
                         <td>
                             <div class="control">
-                                <input class="input" type="text" placeholder="Origem do Recurso">
+                                <input class="input" type="text" name="proposta_orcamentaria[origem_recurso][]" placeholder="Origem do Recurso">
                             </div>
                         </td>
                     </tr>
@@ -555,17 +555,17 @@
                         <td>Material de Consumo</td>
                         <td>
                             <div class="control">
-                                <input class="input" type="text" placeholder="Justificativas">
+                                <input class="input" type="text" name="proposta_orcamentaria[justificativas][]" placeholder="Justificativas">
                             </div>
                         </td>
                         <td>
                             <div class="control">
-                                <input class="input custo-previsto" type="number" placeholder="Custos Previstos">
+                                <input class="input custo-previsto" type="number" name="proposta_orcamentaria[custos_previstos][]" placeholder="Custos Previstos">
                             </div>
                         </td>
                         <td>
                             <div class="control">
-                                <input class="input" type="text" placeholder="Origem do Recurso">
+                                <input class="input" type="text" name="proposta_orcamentaria[origem_recurso][]" placeholder="Origem do Recurso">
                             </div>
                         </td>
                     </tr>
@@ -573,17 +573,17 @@
                         <td>Outros Serviços de Terceiros Pessoa Jurídica</td>
                         <td>
                             <div class="control">
-                                <input class="input" type="text" placeholder="Justificativas">
+                                <input class="input" type="text" name="proposta_orcamentaria[justificativas][]" placeholder="Justificativas">
                             </div>
                         </td>
                         <td>
                             <div class="control">
-                                <input class="input custo-previsto" type="number" placeholder="Custos Previstos">
+                                <input class="input custo-previsto" type="number" name="proposta_orcamentaria[custos_previstos][]" placeholder="Custos Previstos">
                             </div>
                         </td>
                         <td>
                             <div class="control">
-                                <input class="input" type="text" placeholder="Origem do Recurso">
+                                <input class="input" type="text" name="proposta_orcamentaria[origem_recurso][]" placeholder="Origem do Recurso">
                             </div>
                         </td>
                     </tr>
@@ -591,17 +591,17 @@
                         <td>Outras Despesas</td>
                         <td>
                             <div class="control">
-                                <input class="input" type="text" placeholder="Justificativas">
+                                <input class="input" type="text" name="proposta_orcamentaria[justificativas][]" placeholder="Justificativas">
                             </div>
                         </td>
                         <td>
                             <div class="control">
-                                <input class="input custo-previsto" type="number" placeholder="Custos Previstos">
+                                <input class="input custo-previsto" type="number" name="proposta_orcamentaria[custos_previstos][]" placeholder="Custos Previstos">
                             </div>
                         </td>
                         <td>
                             <div class="control">
-                                <input class="input" type="text" placeholder="Origem do Recurso">
+                                <input class="input" type="text" name="proposta_orcamentaria[origem_recurso][]" placeholder="Origem do Recurso">
                             </div>
                         </td>
                     </tr>
@@ -612,13 +612,14 @@
                         <td></td>
                         <td>
                             <div class="control">
-                                <input class="input" id="total-custos" type="number" placeholder="Total">
+                                <input class="input" id="total-custos" type="number" name="proposta_orcamentaria[total_custos]" placeholder="Total">
                             </div>
                         </td>
                         <td></td>
                     </tr>
                 </tfoot>
             </table>
+
 
 
 

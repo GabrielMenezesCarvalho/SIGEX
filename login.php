@@ -23,6 +23,7 @@
 		$_SESSION["nome"] = $row->nome;
 		$_SESSION["tipo"] = $row->tipo;
 		$_SESSION["avaliador"] = $row->avaliador;
+		$_SESSION["usuario_id"] = $row->id;
 		print "<script>location.href='dashboard.php';</script>";
 	}else{
 		unset($usuario);

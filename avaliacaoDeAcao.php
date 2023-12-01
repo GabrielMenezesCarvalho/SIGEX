@@ -44,6 +44,11 @@
             margin-left: 12%;
             margin-right: 12%;
         }
+
+        .list-divider {
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
     </style>
 </head>
 
@@ -80,508 +85,50 @@
 
             <div class="custom-field">
                 <div class="field">
-                    <label class="label">Avaliador</label>
-                    <div class="control">
-                        <div class="select is-fullwidth is-rounded">
-                            <select>
-                                <option>Selecione um avaliador</option>
-                                <!-- Adicione as opções de avaliadores aqui -->
-                            </select>
-                        </div>
-                    </div>
-                </div>
+                    <?php
+                    include("conexao.php");
 
-                <div class="field">
-                    <label class="label">Colegiado</label>
-                    <div class="control">
-                        <div class="select is-fullwidth is-rounded">
-                            <select>
-                                <option>Selecione um colegiado</option>
-                                <!-- Adicione as opções de colegiados aqui -->
-                            </select>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                    // Consulta SQL para obter títulos e IDs das ações vinculadas ao usuário
+                    $sql = "SELECT acoes_edital.id AS acao_id, acoes_edital.titulo
+                    FROM acoes_e_avaliador
+                    INNER JOIN acoes_edital ON acoes_e_avaliador.acao_id = acoes_edital.id
+                    WHERE acoes_e_avaliador.usuario_id = {$_SESSION['usuario_id']}";
 
-            <h2 class="subtitle">Identificação da Proposta</h2>
+                    // Executar a consulta
+                    $result = $conn->query($sql);
 
-            <div class="custom-field">
-                <div class="field">
-                    <label class="label">Modalidade</label>
-                    <div class="control">
-                        <div class="select is-fullwidth is-rounded">
-                            <select>
-                                <option>Selecione a modalidade</option>
-                                <option>Projeto</option>
-                                <option>Empresa Junior</option>
-                                <option>Liga Acadêmica</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="field">
-                    <label class="label">Colegiado</label>
-                    <div class="control">
-                        <div class="select is-fullwidth is-rounded">
-                            <select>
-                                <option>Selecione um colegiado</option>
-                                <!-- Adicione as opções de colegiados aqui -->
-                            </select>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <br>
-            <h2 class="subtitle">Título da Proposta</h2>
+                    // Verificar se há resultados
+                    if ($result->num_rows > 0) {
+                        echo '<div class="menu">';
+                        echo '<p class="menu-label is-size-4">Ações Atribuidas a Você</p>';
+                        echo '<ul class="menu-list">';
+                        echo '<hr class="list-divider">';
+                        while ($row = $result->fetch_assoc()) {
+                            // Criar um link clicável para cada título dentro de um item de lista
+                            echo '<li><a href="acaoavaliada.php?acao_id=' . $row["acao_id"] . '">' . $row["titulo"] . '</a></li>';
+                            // Adicionar uma linha divisória
+                            echo '<hr class="list-divider">';
+                        }
+                        echo '</ul>';
+                        echo '</div>';
+                    } else {
+                        echo "Nenhuma ação encontrada para este usuário.";
+                    }
 
-            <div class="field">
-                <label class="label">Título condiz com a proposta apresentada?</label>
-                <div class="control">
-                    <label class="radio">
-                        <input type="radio" name="condiz" value="sim">
-                        Sim
-                    </label>
-                    <label class="radio">
-                        <input type="radio" name="condiz" value="nao">
-                        Não
-                    </label>
-                </div>
-            </div>
-
-
-            <div class="field">
-                <label class="label">Considerações sobre o título (opcional)</label>
-                <div class="control">
-                    <textarea class="textarea is-fullwidth is-rounded" placeholder="Digite suas considerações sobre o título aqui"></textarea>
-                </div>
-            </div>
-
-            <div class="field">
-                <label class="label">Considerações sobre os objetivos (geral e específicos)</label>
-                <div class="control">
-                    <textarea class="textarea is-fullwidth is-rounded" placeholder="Digite suas considerações sobre os objetivos aqui"></textarea>
-                </div>
-            </div>
-
-            <br>
-
-            <h2 class="subtitle">Análise do Mérito e Relevância Social do Projeto / Proposta</h2>
-            <br>
-            <h3>01 - NATUREZA ACADÊMICA</h3>
-            <br>
-
-            <div class="field">
-                <label class="label">Quanto à contribuição para o aprimoramento e/ou reformulações de concepções e práticas curriculares da Universidade?</label>
-                <div class="control">
-                    <label class="radio">
-                        <input type="radio" name="contribuicao_curriculo" value="atende">
-                        Atende
-                    </label>
-                    <label class="radio">
-                        <input type="radio" name="contribuicao_curriculo" value="parcialmente">
-                        Atende Parcialmente
-                    </label>
-                    <label class="radio">
-                        <input type="radio" name="contribuicao_curriculo" value="nao_atende">
-                        Não Atende
-                    </label>
-                </div>
-            </div>
+                    // Fechar a conexão
+                    $conn->close();
+                    ?>
 
 
 
-            <div class="field">
-                <label class="label">Quanto à sistematização/divulgação do conhecimento produzido pela proposta</label>
-                <div class="control">
-                    <label class="radio">
-                        <input type="radio" name="sistematizacao_divulgacao" value="atende">
-                        Atende
-                    </label>
-                    <label class="radio">
-                        <input type="radio" name="sistematizacao_divulgacao" value="parcialmente">
-                        Atende Parcialmente
-                    </label>
-                    <label class="radio">
-                        <input type="radio" name="sistematizacao_divulgacao" value="nao_atende">
-                        Não Atende
-                    </label>
                 </div>
             </div>
 
-            <div class="field">
-                <label class="label">Quanto ao cumprimento do preceito da indissociabilidade entre extensão, ensino e pesquisa, com o intuito de integrar as ações para atender as demandas da sociedade e/ou o público-alvo, de modo a demonstrar a natureza extensionista da proposta</label>
-                <div class="control">
-                    <label class="radio">
-                        <input type="radio" name="indissociabilidade_extensao" value="atende">
-                        Atende
-                    </label>
-                    <label class="radio">
-                        <input type="radio" name="indissociabilidade_extensao" value="parcialmente">
-                        Atende Parcialmente
-                    </label>
-                    <label class="radio">
-                        <input type="radio" name="indissociabilidade_extensao" value="nao_atende">
-                        Não Atende
-                    </label>
-                </div>
-            </div>
-
-            <div class="field">
-                <label class="label">Quanto à implementação do processo de socialização do conhecimento acadêmico de modo que os resultados oriundos das ações contribuam na formação técnico-científica, cultural, social e pessoal dos acadêmicos?</label>
-                <div class="control">
-                    <label class="radio">
-                        <input type="radio" name="implementacao_socializacao" value="atende">
-                        Atende
-                    </label>
-                    <label class="radio">
-                        <input type="radio" name="implementacao_socializacao" value="parcialmente">
-                        Atende Parcialmente
-                    </label>
-                    <label class="radio">
-                        <input type="radio" name="implementacao_socializacao" value="nao_atende">
-                        Não Atende
-                    </label>
-                </div>
-            </div>
-            <div class="field">
-                <label class="label">Considerações sobre o item "natureza acadêmica" (opcional)</label>
-                <div class="control">
-                    <textarea class="textarea is-fullwidth is-rounded" placeholder="Digite suas considerações sobre a natureza acadêmica aqui"></textarea>
-                </div>
-            </div>
-            <br>
-            <h3>02 - RELAÇÕES COM A SOCIEDADE</h3>
-            <br>
-
-            <div class="field">
-                <label class="label">A ação propõe relação integradora e/ou transformadora entre a Universidade e a Sociedade, de forma que haja contribuição à inclusão de grupos sociais e ampliação de oportunidades educacionais?</label>
-                <div class="control">
-                    <label class="radio">
-                        <input type="radio" name="relacoes_sociedade" value="atende">
-                        Atende
-                    </label>
-                    <label class="radio">
-                        <input type="radio" name="relacoes_sociedade" value="parcialmente">
-                        Atende Parcialmente
-                    </label>
-                    <label class="radio">
-                        <input type="radio" name="relacoes_sociedade" value="nao_atende">
-                        Não Atende
-                    </label>
-                </div>
-            </div>
-
-            <div class="field">
-                <label class="label">A ação aponta mecanismos de diálogo entre o saber acadêmico e o saber popular, visando a geração de
-                    novos conhecimentos?</label>
-                <div class="control">
-                    <label class="radio">
-                        <input type="radio" name="dialogo_saberes" value="atende">
-                        Atende
-                    </label>
-                    <label class="radio">
-                        <input type="radio" name="dialogo_saberes" value="parcialmente">
-                        Atende Parcialmente
-                    </label>
-                    <label class="radio">
-                        <input type="radio" name="dialogo_saberes" value="nao_atende">
-                        Não Atende
-                    </label>
-                </div>
-            </div>
-
-            <div class="field">
-                <label class="label">A ação propõe a contribuição para o desenvolvimento econômico, social e cultural priorizando especificidades
-                    regionais, por meio de propostas, formulação e acompanhamento das políticas públicas?</label>
-                <div class="control">
-                    <label class="radio">
-                        <input type="radio" name="" value="atende">
-                        Atende
-                    </label>
-                    <label class="radio">
-                        <input type="radio" name="" value="parcialmente">
-                        Atende Parcialmente
-                    </label>
-                    <label class="radio">
-                        <input type="radio" name="" value="nao_atende">
-                        Não Atende
-                    </label>
-                </div>
-            </div>
-
-            <div class="field">
-                <label class="label">Considerações sobre o item "Relação com a Sociedade" (opcional)</label>
-                <div class="control">
-                    <textarea class="textarea is-fullwidth is-rounded" placeholder="Digite suas considerações sobre a relação com a sociedade aqui"></textarea>
-                </div>
-            </div>
-
-            <br>
-            <h3>03 - FUNDAMENTAÇÃO TEÓRICA</h3>
-            <br>
-
-            <div class="field">
-                <label class="label">A base teórica que fundamenta a proposta encontra-se:</label>
-                <div class="control">
-                    <label class="radio">
-                        <input type="radio" name="base_teorica" value="consistente">
-                        Consistente
-                    </label>
-                    <label class="radio">
-                        <input type="radio" name="base_teorica" value="parcialmente">
-                        Parcialmente Consistente
-                    </label>
-                    <label class="radio">
-                        <input type="radio" name="base_teorica" value="inconsistente">
-                        Inconsistente
-                    </label>
-                </div>
-            </div>
-            <div class="field">
-                <label class="label">Considerações sobre o item "Fundamentação Teórica" (opcional)</label>
-                <div class="control">
-                    <textarea class="textarea is-fullwidth is-rounded" placeholder="Digite suas considerações sobre a fundamentação teórica aqui"></textarea>
-                </div>
-            </div>
-
-
-            <br>
-            <h3>04 - ESTRUTURA DO PROJETO</h3>
-            <br>
-
-            <div class="field">
-                <label class="label">Quanto à estrutura e metodologia a proposta encontra-se:</label>
-                <div class="control">
-                    <label class="radio">
-                        <input type="radio" name="" value="consistente">
-                        Consistente
-                    </label>
-                    <label class="radio">
-                        <input type="radio" name="" value="parcialmente">
-                        Parcialmente Consistente
-                    </label>
-                    <label class="radio">
-                        <input type="radio" name="" value="inconsistente">
-                        Inconsistente
-                    </label>
-                </div>
-            </div>
-            <div class="field">
-                <label class="label">Considerações sobre o item “Estrutura do Projeto” (opcional)</label>
-                <div class="control">
-                    <textarea class="textarea is-fullwidth is-rounded" placeholder="Digite suas considerações sobre a estrutura do projeto aqui"></textarea>
-                </div>
-            </div>
-            <br>
-            <h3>05 - INTERAÇÃO DO CONHECIMENTO</h3>
-            <br>
-
-            <div class="field">
-                <label class="label">Quanto à interdisciplinaridade e/ou multidiciplinaridade
-                    a proposta encontra-se:</label>
-                <div class="control">
-                    <label class="radio">
-                        <input type="radio" name="" value="consistente">
-                        Consistente
-                    </label>
-                    <label class="radio">
-                        <input type="radio" name="" value="parcialmente">
-                        Parcialmente Consistente
-                    </label>
-                    <label class="radio">
-                        <input type="radio" name="" value="inconsistente">
-                        Inconsistente
-                    </label>
-                </div>
-            </div>
-            <div class="field">
-                <label class="label">Considerações sobre o item “Interação do conhecimento” (opcional)</label>
-                <div class="control">
-                    <textarea class="textarea is-fullwidth is-rounded" placeholder="Digite suas considerações sobre interação do conhecimento aqui"></textarea>
-                </div>
-            </div>
-            <br>
-            <h3>06 - PÚBLICO ALVO</h3>
-            <br>
-
-            <div class="field">
-                <label class="label">Quanto à descrição e ao quantitativo do público alvo
-                    a proposta encontra-se:</label>
-                <div class="control">
-                    <label class="radio">
-                        <input type="radio" name="" value="consistente">
-                        Consistente
-                    </label>
-                    <label class="radio">
-                        <input type="radio" name="" value="parcialmente">
-                        Parcialmente Consistente
-                    </label>
-                    <label class="radio">
-                        <input type="radio" name="" value="inconsistente">
-                        Inconsistente
-                    </label>
-                </div>
-            </div>
-            <div class="field">
-                <label class="label">Considerações sobre o item “Público Alvo” (opcional)</label>
-                <div class="control">
-                    <textarea class="textarea is-fullwidth is-rounded" placeholder="Digite suas considerações sobre o público alvo aqui"></textarea>
-                </div>
-            </div>
-            <br>
-            <h3>07 - CRONOGRAMA</h3>
-            <br>
-
-            <div class="field">
-                <label class="label">Quanto a exequibilidade do cronograma em relação às
-                    atividades da proposta para obtenção dos resultados
-                    esperados, a proposição encontra-se adequeda e/ou
-                    suficiente?</label>
-                <div class="control">
-                    <label class="radio">
-                        <input type="radio" name="" value="sim">
-                        Sim
-                    </label>
-                    <label class="radio">
-                        <input type="radio" name="" value="parcialmente">
-                        Parcialmente
-                    </label>
-                    <label class="radio">
-                        <input type="radio" name="" value="nao">
-                        Não
-                    </label>
-                </div>
-            </div>
-            <div class="field">
-                <label class="label">Considerações sobre o item “Cronograma” (opcional)</label>
-                <div class="control">
-                    <textarea class="textarea is-fullwidth is-rounded" placeholder="Digite suas considerações sobre o cronograma aqui"></textarea>
-                </div>
-            </div>
-            <br>
-            <h3>08 - RECURSOS </h3>
-            <br>
-
-            <div class="field">
-                <label class="label">Quanto a exequibilidade do cronograma em relação às
-                    atividades da proposta para obtenção dos resultados
-                    esperados, a proposição encontra-se adequeda e/ou
-                    suficiente?</label>
-                <div class="control">
-                    <label class="radio">
-                        <input type="radio" name="" value="consistente">
-                        Consistente
-                    </label>
-                    <label class="radio">
-                        <input type="radio" name="" value="parcialmente">
-                        Parcialmente Consistente
-                    </label>
-                    <label class="radio">
-                        <input type="radio" name="" value="inconsistente">
-                        Inconsistente
-                    </label>
-                </div>
-            </div>
-            <div class="field">
-                <label class="label">Considerações sobre o item “Recursos” (opcional)</label>
-                <div class="control">
-                    <textarea class="textarea is-fullwidth is-rounded" placeholder="Digite suas considerações sobre os recursos aqui"></textarea>
-                </div>
-            </div>
-            <br>
-            <h3>09 - RESULTADOS ESPERADOS</h3>
-            <br>
-
-            <div class="field">
-                <label class="label">Quanto aos resultados esperados, bem como os benefícios
-                    potenciais para a Sociedade a proposta encontra-se:</label>
-                <div class="control">
-                    <label class="radio">
-                        <input type="radio" name="" value="consistente">
-                        Consistente
-                    </label>
-                    <label class="radio">
-                        <input type="radio" name="" value="parcialmente">
-                        Parcialmente Consistente
-                    </label>
-                    <label class="radio">
-                        <input type="radio" name="" value="inconsistente">
-                        Inconsistente
-                    </label>
-                </div>
-            </div>
-            <div class="field">
-                <label class="label">Considerações sobre o item “Resultados esperados” (opcional)</label>
-                <div class="control">
-                    <textarea class="textarea is-fullwidth is-rounded" placeholder="Digite suas considerações sobre os resultados esperados aqui"></textarea>
-                </div>
-            </div>
-            <br>
-            <h3>10 - EXTENSÃO</h3>
-            <br>
-
-            <div class="field">
-                <label class="label">A proposta apresentada realmente trata de atividade de extensão?</label>
-                <div class="control">
-                    <label class="radio">
-                        <input type="radio" name="" value="sim">
-                        Sim
-                    </label>
-                    <label class="radio">
-                        <input type="radio" name="" value="parcialmente">
-                        Parcialmente
-                    </label>
-                    <label class="radio">
-                        <input type="radio" name="" value="nao">
-                        Não
-                    </label>
-                </div>
-            </div>
-            <div class="field">
-                <label class="label">Considerações sobre o item “Extensão” (opcional)</label>
-                <div class="control">
-                    <textarea class="textarea is-fullwidth is-rounded" placeholder="Digite suas considerações sobre extensão aqui"></textarea>
-                </div>
-            </div>
-            <br>
-            <h1 class="title has-text-centered has-text-weight-bold">PARECER</h1>
-            <br>
-
-            <div class="field has-text-centered">
-                <div class="control">
-                    <label class="radio">
-                        <input type="radio" name="recomendacao" value="recomendado">
-                        Recomendado
-                    </label>
-                    <label class="radio">
-                        <input type="radio" name="recomendacao" value="recomendado_com_adequacoes">
-                        Recomendado com Adequações
-                    </label>
-                    <label class="radio">
-                        <input type="radio" name="recomendacao" value="nao_recomendado">
-                        Não Recomendado
-                    </label>
-                </div>
-            </div>
-            <br>
-
-            <div class="field">
-                <label class="label has-text-centered has-text-weight-bold">FUDAMENTAÇÃO GERAL DA ANÁLISE DA
-                    PROPOSTA (OBRIGATÓRIO)</label>
-                <div class="control">
-                    <textarea class="textarea is-fullwidth is-rounded" placeholder="Comente eventuais pontos fortes e frágeis da proposta avaliada, se for o caso, apresente sugestões que possam contribuir para a melhoria da ação, principalmente se seu parecer for “ Recomendado com Adequações”"></textarea>
-                </div>
-            </div>
             <div class="field is-grouped is-grouped-centered">
 
                 <p class="control">
                     <button class="button is-danger" onclick="window.location.href='menuavaliador.php'">Voltar para a Tela Inicial</button>
                 </p>
-                <p class="control">
-                    <button class="button is-primary" type="submit">Submeter a Avaliação</button>
-                </p>
-
             </div>
 
         </div>

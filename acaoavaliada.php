@@ -51,7 +51,7 @@
 
     <nav class="navbar" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
-            <a class="navbar-item" href="#">
+            <a class="navbar-item" href="menuavaliador.php">
                 <img src="imagens/Group 100.png" alt="Logo 1">
             </a>
         </div>

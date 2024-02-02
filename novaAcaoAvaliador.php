@@ -83,7 +83,7 @@
 
         <form method="post" action="processar.php" onsubmit="return salvarDados()">
             <div class="container">
-                <h1 class="title has-text-centered has-text-weight-bold">Formulário de Submissão de Ação de Extensão</h1>
+                <h1 class="title has-text-centered has-text-weight-bold">Formulário de Submissão de Projeto PIBEX</h1>
 
                 <br>
 
@@ -172,12 +172,19 @@
             </div>
 
 
-            <label class="label">Modalidade (Saúde, Educação)</label>
+            <label class="label">Área Temática</label>
             <div class="control">
                 <div class="select is-fullwidth is-rounded">
-                    <select name="MODALIDADE">
-                        <option>Saúde</option>
-                        <option>Educação</option>
+                    <select name="MODALIDADE"> <!-- Precisa mudar o nome no banco -->
+                        <option> 01 - Comunicação</option>
+                        <option> 02 - Cultura</option>
+                        <option> 03 - Direitos Humanos e Justiça</option>
+                        <option> 04 - Educação</option>
+                        <option> 05 - Meio Ambiente</option>
+                        <option> 06 - Saúde</option>
+                        <option> 07 - Tecnologia e Produção</option>
+                        <option> 08 - Trabalho</option>
+
                     </select>
                 </div>
             </div>
@@ -233,40 +240,25 @@
                     <input class="input is-fullwidth is-rounded" type="text" id="titulo" name="titulo" placeholder="Título">
                 </div>
             </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             <div class="field">
                 <label class="label">Resumo</label>
                 <div class="control">
-                    <textarea class="textarea is-fullwidth tinymce" placeholder="Resumo" name="RESUMO"></textarea>
+                    <textarea class="textarea is-fullwidth tinymce" placeholder="Resumo com, no máximo, 500 palavras e um mínimo de três (03) e máximo de cinco (05) palavras-chave." name="RESUMO"></textarea>
                 </div>
             </div>
 
             <div class="field">
                 <label class="label">Introdução</label>
                 <div class="control">
-                    <textarea class="textarea is-fullwidth" placeholder="Introdução" name="INTRODUCAO"></textarea>
+                    <textarea class="textarea is-fullwidth tinymce" placeholder="Apresentação do projeto como um todo, por meio da qual o leitor/avaliador será capaz de entender de forma sucinta tanto a ação proposta como sua forma de execução; Explanações teóricas longas e detalhadas não são necessárias, visto que a avaliação será concentrada no aspecto extensionista do projeto. Portanto, recomenda-se que a apresentação vincule a teoria à prática extensionista e/ou vice-versa (conforme necessidade de cada projeto)." name="INTRODUCAO"></textarea>
                 </div>
             </div>
+
 
             <div class="field">
                 <label class="label">Justificativa</label>
                 <div class="control">
-                    <textarea class="textarea is-fullwidth tinymce" placeholder="Justificativa" name="JUSTIFICATIVA"></textarea>
+                    <textarea class="textarea is-fullwidth tinymce" placeholder="Identificação da situação-problema na qual o projeto de extensão se propõe a intervir; Importância da execução do trabalho extensionista tanto para a comunidade externa que o recebe, bem como para a equipe executora." name="JUSTIFICATIVA"></textarea>
                 </div>
             </div>
 
@@ -278,53 +270,33 @@
             </div>
 
             <div class="field">
-                <label class="label">Metodologia</label>
+                <label class="label">Método</label>
                 <div class="control">
-                    <textarea class="textarea is-fullwidth tinymce" placeholder="Metodologia" name="METODOLOGIA"></textarea>
+                    <textarea class="textarea is-fullwidth tinymce" placeholder="Consonância do método contemplando os objetivos  e as metas. Detalhamento suficiente para o entendimento da proposta: previsão de procedimentos, instrumentos, atividades e interação com a comunidade externa." name="METODOLOGIA"></textarea>
                 </div>
             </div>
+
+
 
             <div class="field">
                 <label class="label">Resultados Esperados</label>
                 <div class="control">
-                    <textarea class="textarea is-fullwidth tinymce" placeholder="Resultados Esperados" name="RESULTADOS_ESPERADOS"></textarea>
+                    <textarea class="textarea is-fullwidth tinymce" placeholder="O que se espera que a comunidade (interna e externa) alcance; Quais os benefícios que o público ou comunidade deve obter ao final das atividades do projeto?" name="RESULTADOS_ESPERADOS"></textarea>
                 </div>
             </div>
 
-            <div class="field">
-                <label class="label">Articulação com o ensino e a pesquisa</label>
-                <div class="control">
-                    <textarea class="textarea is-fullwidth tinymce" placeholder="Articulação com o ensino e a pesquisa" name="ARTICULACAO_ENSINO"></textarea>
-                </div>
-            </div>
 
-            <div class="field" id="indicadores-sistematica">
-                <label class="label">INDICADORES E SISTEMÁTICA</label>
-                <div class="control">
-                    <textarea class="textarea is-fullwidth tinymce" placeholder="INDICADORES E SISTEMÁTICA" name="INDICADORES_SISTEMATICA"></textarea>
-                </div>
-            </div>
 
-            <div class="field" id="plano-trabalho-coordenador">
-                <label class="label">PLANO DE TRABALHO COORDENADOR</label>
-                <div class="control">
-                    <textarea class="textarea is-fullwidth tinymce" placeholder="PLANO DE TRABALHO COORDENADOR" name="PLANO_TRABALHO_COORDENADOR"></textarea>
-                </div>
-            </div>
+
 
             <div class="field" id="plano-trabalho-discentes">
-                <label class="label">PLANO DE TRABALHO DOS DISCENTES</label>
+                <label class="label">Plano de Trabalho dos Discentes</label>
                 <div class="control">
-                    <textarea class="textarea is-fullwidth tinymce" placeholder="PLANO DE TRABALHO DOS DISCENTES" name="PLANO_TRABALHO_DISCENTE"></textarea>
+                    <textarea class="textarea is-fullwidth tinymce" placeholder="Descrição das atividades dos discentes, em conformidade com o cronograma (sob a forma de tópicos). Informar a quantidade de horas semanais do projeto (Entre 12h e 20h)." name="PLANO_TRABALHO_DISCENTE"></textarea>
                 </div>
             </div>
 
-            <div class="field">
-                <label class="label">Relação com a Sociedade - Indicadores de Impacto</label>
-                <div class="control">
-                    <textarea class="textarea is-fullwidth tinymce" placeholder="Relação com a Sociedade - Indicadores de Impacto" name="RELACAO_SOCIEDADE"></textarea>
-                </div>
-            </div>
+
 
             <div class="field">
                 <label class="label">Referências Bibliográficas</label>
@@ -337,7 +309,7 @@
 
             <!-- Dentro do formulário -->
             <div class="field">
-                <h2 class="subtitle">Público-Alvo e Número de Pessoas Beneficiadas</h2>
+                <h2 class="subtitle">Público Beneficiado e Número de Pessoas Beneficiadas</h2>
             </div>
 
             <div class="field">
@@ -345,7 +317,7 @@
                     <!-- ... (Cabeçalho da tabela) -->
                     <tbody>
                         <tr>
-                            <td>Publico interno</td>
+                            <td>Publico interno</td> <!--separar categorias internas. Discente, docente, técnico administrativos e terceirizados.-->
                             <td>
                                 <div class="control">
                                     <input class="input" type="text" name="publico_interno_descricao" placeholder="Descrição do público interno">
@@ -395,7 +367,7 @@
                 <div class="field mr-2">
                     <label class="label">Início</label>
                     <div class="control">
-                        <input class="input" type="date" name="inicio">
+                        <input class="input" type="date" name="inicio"> <!--apagar esse inicio e esse fim-->
                     </div>
                 </div>
 
@@ -629,6 +601,21 @@
             </div>
 
             <div class="field">
+                <label class="label">É um projeto de Extensão com temática Antirracista, cujos objetivos geral e específicos estão relacionados a esta temática?</label>
+                <p style="color: red">ADICIONAL DE 5% NA NOTA FINAL (SOMENTE PELA COMISSÃO DO EDITAL)</p>
+                <div class="control">
+                    <label class="radio">
+                        <input type="radio" name="antiracista" value="sim">
+                        Sim
+                    </label>
+                    <label class="radio">
+                        <input type="radio" name="antiracista" value="nao" checked>
+                        Não
+                    </label>
+                </div>
+            </div>
+            
+            <div class="field">
                 <label class="label">Ação está no PPC do curso?</label>
                 <div class="control">
                     <label class="radio">
@@ -819,8 +806,8 @@
                 </div>
             </div>
 
-            <div class="field" id="fomentoExternoDropdown" style="display: none;">
-                <label class="label">Qual Fomento Externo?</label>
+            <div class="field" id="fomentoExternoDropdown" style="display: none;"> <!--deixar aberto-->
+                <label class="label">Qual a instuição do fomento ou coofinânciamento?</label>
                 <div class="control">
                     <div class="select is-fullwidth is-rounded">
                         <select>
@@ -993,11 +980,11 @@
         <script>
             tinymce.init({
                 selector: '.tinymce',
-                height: 300,
+                height: 500,
                 plugins: 'anchor autolink charmap codesample image link lists media searchreplace table visualblocks wordcount',
                 toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments |  a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
                 tinycomments_mode: 'embedded',
-                // images_upload_url: 'upload.php',
+                images_upload_url: 'upload.php',
                 images_upload_handler: (blobInfo, progress) => new Promise((resolve, reject) => {
                     const xhr = new XMLHttpRequest();
                     xhr.withCredentials = false;

@@ -40,7 +40,7 @@
 
 <body>
 
-    
+
 
     <nav class="navbar" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
@@ -54,12 +54,12 @@
                     <i class="fa fa-user-circle"></i>
                 </div>
                 <?php
-                    session_start();
-                    if(empty($_SESSION) ){
-                        print "<script>location.href='index.php';</script>";
-                    }
-                    print "Olá, ".$_SESSION["nome"];
-                    print "<a style='margin-left: 10px;' href='logout.php'>Sair</a>";
+                session_start();
+                if (empty($_SESSION)) {
+                    print "<script>location.href='index.php';</script>";
+                }
+                print "Olá, " . $_SESSION["nome"];
+                print "<a style='margin-left: 10px;' href='logout.php'>Sair</a>";
 
                 ?>
             </div>
@@ -229,70 +229,70 @@
 
         <textarea id="image">
   </textarea>
-  <script>
-    tinymce.init({
-      selector: '#image',
-      height: 1000,
-      plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage tinycomments tableofcontents footnotes mergetags autocorrect typography inlinecss',
-      toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
-      tinycomments_mode: 'embedded',
-      // images_upload_url: 'upload.php',
-      images_upload_handler: (blobInfo, progress) => new Promise((resolve, reject) => {
-        const xhr = new XMLHttpRequest();
-        xhr.withCredentials = false;
-        xhr.open('POST', 'upload.php');
+        <script>
+            tinymce.init({
+                selector: '#image',
+                height: 1000,
+                plugins: 'anchor autolink charmap codesample image link lists media searchreplace table visualblocks wordcount',
+                toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments |  a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+                tinycomments_mode: 'embedded',
+                // images_upload_url: 'upload.php',
+                images_upload_handler: (blobInfo, progress) => new Promise((resolve, reject) => {
+                    const xhr = new XMLHttpRequest();
+                    xhr.withCredentials = false;
+                    xhr.open('POST', 'upload.php');
 
-        xhr.upload.onprogress = (e) => {
-          progress(e.loaded / e.total * 100);
-        };
+                    xhr.upload.onprogress = (e) => {
+                        progress(e.loaded / e.total * 100);
+                    };
 
-        xhr.onload = () => {
-          if (xhr.status === 403) {
-            reject({
-              message: 'HTTP Error: ' + xhr.status,
-              remove: true
+                    xhr.onload = () => {
+                        if (xhr.status === 403) {
+                            reject({
+                                message: 'HTTP Error: ' + xhr.status,
+                                remove: true
+                            });
+                            return;
+                        }
+
+                        if (xhr.status < 200 || xhr.status >= 300) {
+                            console.log(xhr);
+                            reject('HTTP Error: ' + xhr.status + ' ' + xhr.statusText);
+                            return;
+                        }
+
+                        const json = JSON.parse(xhr.responseText);
+
+                        if (!json || typeof json.location != 'string') {
+                            reject('Invalid JSON: ' + xhr.responseText);
+                            return;
+                        }
+
+                        resolve(json.location);
+                    };
+
+                    xhr.onerror = () => {
+                        reject('Image upload failed due to a XHR Transport error. Code: ' + xhr.status);
+                    };
+
+                    const formData = new FormData();
+                    formData.append('file', blobInfo.blob(), blobInfo.filename());
+
+                    xhr.send(formData);
+                })
             });
-            return;
-          }
 
-          if (xhr.status < 200 || xhr.status >= 300) {
-            console.log(xhr);
-            reject('HTTP Error: ' + xhr.status + ' ' + xhr.statusText);
-            return;
-          }
-
-          const json = JSON.parse(xhr.responseText);
-
-          if (!json || typeof json.location != 'string') {
-            reject('Invalid JSON: ' + xhr.responseText);
-            return;
-          }
-
-          resolve(json.location);
-        };
-
-        xhr.onerror = () => {
-          reject('Image upload failed due to a XHR Transport error. Code: ' + xhr.status);
-        };
-
-        const formData = new FormData();
-        formData.append('file', blobInfo.blob(), blobInfo.filename());
-
-        xhr.send(formData);
-      })
-    });
-
-    // colocar imagem no tinymce
-    const images = document.querySelectorAll('.image');
-    images.forEach(image => {
-      image.addEventListener('click', event => {
-        // tinymce.activeEditor.execCommand('mceInsertContent', false, image.outerHTML);
-        tinymce.get('image').execCommand('mceInsertContent', false, image.outerHTML);
-        // tinymce.activeEditor.setContent(image.outerHTML);
-        console.log(event);
-      })
-    })
-  </script>
+            // colocar imagem no tinymce
+            const images = document.querySelectorAll('.image');
+            images.forEach(image => {
+                image.addEventListener('click', event => {
+                    // tinymce.activeEditor.execCommand('mceInsertContent', false, image.outerHTML);
+                    tinymce.get('image').execCommand('mceInsertContent', false, image.outerHTML);
+                    // tinymce.activeEditor.setContent(image.outerHTML);
+                    console.log(event);
+                })
+            })
+        </script>
 
 
 
@@ -341,8 +341,7 @@
         <div class="field">
             <label class="label">Articulação com o ensino e a pesquisa</label>
             <div class="control">
-                <textarea class="textarea is-fullwidth is-rounded"
-                    placeholder="Articulação com o ensino e a pesquisa"></textarea>
+                <textarea class="textarea is-fullwidth is-rounded" placeholder="Articulação com o ensino e a pesquisa"></textarea>
             </div>
         </div>
 
@@ -350,8 +349,7 @@
         <div class="field">
             <label class="label">Relação com a Sociedade - Indicadores de Impacto</label>
             <div class="control">
-                <textarea class="textarea is-fullwidth is-rounded"
-                    placeholder="Relação com a Sociedade - Indicadores de Impacto"></textarea>
+                <textarea class="textarea is-fullwidth is-rounded" placeholder="Relação com a Sociedade - Indicadores de Impacto"></textarea>
             </div>
         </div>
 
@@ -746,7 +744,7 @@
             const ligaAcademicaDropdown = document.getElementById('ligaAcademicaDropdown');
 
             ligaAcademicaRadio.forEach(radio => {
-                radio.addEventListener('change', function () {
+                radio.addEventListener('change', function() {
                     if (this.value === 'sim') {
                         ligaAcademicaDropdown.style.display = 'block';
                     } else {
@@ -786,7 +784,7 @@
             const empresaJuniorDropdown = document.getElementById('empresaJuniorDropdown');
 
             empresaJuniorRadio.forEach(radio => {
-                radio.addEventListener('change', function () {
+                radio.addEventListener('change', function() {
                     if (this.value === 'sim') {
                         empresaJuniorDropdown.style.display = 'block';
                     } else {
@@ -826,7 +824,7 @@
             const gruposVulneraveisDropdown = document.getElementById('gruposVulneraveisDropdown');
 
             gruposVulneraveisRadio.forEach(radio => {
-                radio.addEventListener('change', function () {
+                radio.addEventListener('change', function() {
                     if (this.value === 'sim') {
                         gruposVulneraveisDropdown.style.display = 'block';
                     } else {
@@ -850,7 +848,7 @@
         </div>
 
         <div class="field" id="fomentoExternoDropdown" style="display: none;">
-            <label class="label">Qual Fomento Externo?</label>
+            <label class="label">Qual a instuição do fomento ou coofinânciamento?</label>
             <div class="control">
                 <div class="select is-fullwidth is-rounded">
                     <select>
@@ -866,7 +864,7 @@
             const fomentoExternoDropdown = document.getElementById('fomentoExternoDropdown');
 
             fomentoExternoRadio.forEach(radio => {
-                radio.addEventListener('change', function () {
+                radio.addEventListener('change', function() {
                     if (this.value === 'sim') {
                         fomentoExternoDropdown.style.display = 'block';
                     } else {
@@ -923,7 +921,7 @@
             const parceriaInstituicoesDetalhes = document.getElementById('parceriaInstituicoesDetalhes');
 
             parceriaInstituicoesRadio.forEach(radio => {
-                radio.addEventListener('change', function () {
+                radio.addEventListener('change', function() {
                     if (this.value === 'sim') {
                         parceriaInstituicoesDetalhes.style.display = 'block';
                     } else {
@@ -958,7 +956,7 @@
         </script>
         <script>
             // Função para adicionar uma nova linha na tabela da equipe de execução
-            document.getElementById('addEquipeExecucaoRow').addEventListener('click', function () {
+            document.getElementById('addEquipeExecucaoRow').addEventListener('click', function() {
                 const tableBody = document.querySelector('#equipe-execucao-table tbody');
                 const newRow = document.createElement('tr');
                 newRow.innerHTML = `
@@ -998,7 +996,7 @@
         </script>
         <script>
             // Função para adicionar uma nova linha de Atividades Planejadas, Período e Local
-            document.getElementById('addRow').addEventListener('click', function () {
+            document.getElementById('addRow').addEventListener('click', function() {
                 const tableBody = document.querySelector('#cronograma-table tbody');
                 const newRow = document.createElement('tr');
                 newRow.innerHTML = `
@@ -1020,7 +1018,6 @@
     `;
                 tableBody.appendChild(newRow);
             });
-
         </script>
         <script>
             // Função para preencher o dropdown de estados
@@ -1058,7 +1055,7 @@
 
             // Adicionar um ouvinte de evento para o dropdown de estados
             const estadosDropdown = document.getElementById('estados');
-            estadosDropdown.addEventListener('change', function () {
+            estadosDropdown.addEventListener('change', function() {
                 const estadoSelecionado = this.value;
                 if (estadoSelecionado) {
                     preencherCidades(estadoSelecionado);
@@ -1071,7 +1068,7 @@
             // Preencher inicialmente o dropdown de estados
             preencherEstados();
         </script>
-        
+
 
 
 

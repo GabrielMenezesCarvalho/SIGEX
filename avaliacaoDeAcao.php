@@ -105,7 +105,7 @@
                         echo '<hr class="list-divider">';
                         while ($row = $result->fetch_assoc()) {
                             // Criar um link clicável para cada título dentro de um item de lista
-                            echo '<li><a href="acaoavaliada.php?acao_id=' . $row["acao_id"] . '">' . $row["titulo"] . '</a></li>';
+                            echo '<li><a href="paginateste.php?acao_id=' . $row["acao_id"] . '">' . $row["titulo"] . '</a></li>';
                             // Adicionar uma linha divisória
                             echo '<hr class="list-divider">';
                         }

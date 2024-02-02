@@ -69,7 +69,7 @@
 <body>
   <nav class="navbar" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
-      <a class="navbar-item" href="#">
+      <a class="navbar-item" href="menuavaliador.php">
         <img src="imagens/Group 100.png" alt="Logo 1">
       </a>
     </div>
@@ -92,14 +92,32 @@
   </nav>
 
   <div class="container">
-    <h1 class="welcome-message">
-      <?php
+  <h1 class="welcome-message">
+            <?php
 
-      print "Bem Vindo à Área do Pesquisador: " . $_SESSION["nome"];
+            $tipo = $_SESSION["tipo"];
+            $nome = $_SESSION["nome"];
 
+            switch ($tipo) {
+                case 1:
+                    $funcao = "Aluno";
+                    break;
+                case 2:
+                    $funcao = "Professor";
+                    break;
+                case 3:
+                    $funcao = "Técnico Administrativo";
+                    break;
+                case 4:
+                    $funcao = "Colaborador Externo";
+                    break;
+                default:
+                    $funcao = "Usuário Desconhecido";
+            }
 
-      ?>
-    </h1>
+            print "Bem Vindo à Área do $funcao: $nome";
+            ?>
+        </h1>
 
     <div class="square-button-container">
 
@@ -108,15 +126,19 @@
       </button>
 
       <button class="square-button" onclick="window.location.href='novaAcaoAvaliador.php';">
-        <img src="imagens/CadastrarAcoes.png" alt="Imagem do Botão">
+        <img src="imagens/Submeter pibex.png" alt="Imagem do Botão">
       </button>
 
       <button class="square-button" onclick="window.location.href='novaAcaoAvaliadorVoluntario.php';">
-        <img src="imagens/cadastrar acao voluntaria.png" alt="Imagem do Botão">
+        <img src="imagens/Submeter acao voluntaria.png" alt="Imagem do Botão">
       </button>
 
       <button class="square-button" onclick="window.location.href='avaliacaoDeAcao.php';">
-        <img src="imagens/AvaliarAcoes.png" alt="Imagem do Botão">
+        <img src="imagens/Avaliar Submissões.png" alt="Imagem do Botão">
+      </button>
+
+      <button class="square-button" onclick="window.location.href='outra-pagina.html';">
+        <img src="imagens/Enviar relatorio.png" alt="Imagem do Botão">
       </button>
 
       <button class="square-button" onclick="window.location.href='outra-pagina.html';">
